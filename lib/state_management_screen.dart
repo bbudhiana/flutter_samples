@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_http_restful_sample/state_management_settings.dart';
-import './provider/uiset.dart';
 import 'package:provider/provider.dart';
+
+import './state_management_settings.dart';
+import './provider/uiset.dart';
 
 class StateManagementScreen extends StatelessWidget {
   static const routeName = '/state-management';

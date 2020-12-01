@@ -1,8 +1,8 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_http_restful_sample/bloc/post_bloc.dart';
-import 'package:flutter_http_restful_sample/ui/post_item.dart';
+import './bloc/post_bloc.dart';
+import './ui/post_item.dart';
 
 class InfiniteLoadingScreen extends StatefulWidget {
   static const routeName = "/infinite-loading";
@@ -22,7 +22,8 @@ class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
     double currentScroll = controller.position.pixels;
 
     if (currentScroll == maxScroll) {
-      bloc.add(PostEvent());
+      //bloc.add(PostEvent());
+      context.read<PostBloc>()..add(PostEvent());
     }
   }
 
@@ -45,7 +46,8 @@ class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
 
     //INI ADALAH PERINTAH UNTUK AMBIL BLOC PROVIDER DI ROOT/MAIN PAGE
     //bloc = context.bloc<PostBloc>();
-    bloc = context.read<PostBloc>();
+    //bloc = context.read<PostBloc>();
+    //context.watch<PostBloc>();
     controller.addListener(onScroll);
 
     return Scaffold(
@@ -56,6 +58,7 @@ class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
         margin: EdgeInsets.only(left: 20, right: 20),
         child: BlocBuilder<PostBloc, PostState>(
           builder: (context, state) {
+            //print(state);
             //dari mainpage
             if (state is PostUninitialized) {
               return Center(

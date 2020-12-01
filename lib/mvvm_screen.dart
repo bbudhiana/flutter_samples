@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_http_restful_sample/bloc/user_bloc.dart';
-import 'package:flutter_http_restful_sample/ui/user_card.dart';
+import './bloc/user_bloc.dart';
+import './ui/user_card.dart';
 
-import 'model/user.dart';
+import './model/user.dart';
 
 /*
 TUJUAN MVVM : memisahkan state dan logic dari view, menjadi component lain  yang disebut view model (BLoC)
@@ -20,7 +20,7 @@ class MvvmScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //ambil bloc nya
     //UserBloc bloc = context.bloc<UserBloc>();
-    UserBloc bloc = context.read<UserBloc>();
+    UserBloc bloc = context.watch<UserBloc>();
 
     return Scaffold(
         appBar: AppBar(

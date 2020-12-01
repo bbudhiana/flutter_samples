@@ -18,8 +18,10 @@ class Post {
         "&_limit=" +
         limit.toString();
 
+    //print(apiURL);
     //json
     var apiResult = await http.get(apiURL);
+    //print(apiResult.body);
 
     //json object berupa list
     var jsonObject = json.decode(apiResult.body) as List;

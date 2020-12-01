@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_http_restful_sample/model/post.dart';
+import '../model/post.dart';
 
 class PostEvent {}
 

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_http_restful_sample/widgets/image_input.dart';
+import '../widgets/image_input.dart';
 import '../provider/great_places.dart';
 
 class AddPlaceScreen extends StatefulWidget {

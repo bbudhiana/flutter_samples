@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_http_restful_sample/bloc/color_bloc.dart';
-import 'package:flutter_http_restful_sample/bloc/counter_bloc.dart';
-import 'package:flutter_http_restful_sample/ui/draft_page.dart';
+import '../bloc/color_bloc.dart';
+import '../bloc/counter_bloc.dart';
+import '../ui/draft_page.dart';
 
 class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //ColorBloc colorBloc = context.bloc<ColorBloc>();
     //CounterBloc counterBloc = context.bloc<CounterBloc>();
-    ColorBloc colorBloc = context.read<ColorBloc>();
-    CounterBloc counterBloc = context.read<CounterBloc>();
+    //ColorBloc colorBloc = context.read<ColorBloc>();
+    //CounterBloc counterBloc = context.read<CounterBloc>();
+    ColorBloc colorBloc = context.watch<ColorBloc>();
+    CounterBloc counterBloc = context.watch<CounterBloc>();
     return BlocBuilder<ColorBloc, Color>(
       builder: (context, color) => DraftPage(
         backgroundColor: color,

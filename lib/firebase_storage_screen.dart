@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_http_restful_sample/provider/database_services.dart';
 import 'package:image_picker/image_picker.dart';
+
+import './provider/database_services.dart';
 
 class FirebaseStorageScreen extends StatefulWidget {
   static const routeName = "/firebase-storage";

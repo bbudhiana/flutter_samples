@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_http_restful_sample/mobx/counter.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
+import './mobx/counter.dart';
 
 class MobxStateScreen extends StatelessWidget {
   static const routeName = "/mobx-screen";

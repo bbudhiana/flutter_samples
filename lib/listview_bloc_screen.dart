@@ -18,8 +18,17 @@ class ListviewBlocScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /*
+      The easiest way to read a value is by using the extension methods on [BuildContext]:
+
+    context.watch<T>(), which makes the widget listen to changes on T
+    context.read<T>(), which returns T without listening to it
+    context.select<T, R>(R cb(T value)), which allows a widget to listen to only a small part of T.
+
+    */
     //ProductBloc bloc = context.bloc<ProductBloc>();
-    ProductBloc bloc = context.read<ProductBloc>();
+    //ProductBloc bloc = context.read<ProductBloc>();
+    ProductBloc bloc = context.watch<ProductBloc>();
 
     return Scaffold(
       appBar: AppBar(

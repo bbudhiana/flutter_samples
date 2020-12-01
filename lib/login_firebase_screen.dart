@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_http_restful_sample/provider/auth_services.dart';
 import 'package:provider/provider.dart';
-
 import 'widgets/wrapper.dart';
+
+import './provider/auth_services.dart';
 
 class LoginFirebaseScreen extends StatelessWidget {
   static const routeName = "/login-firebase";

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_http_restful_sample/model/user.dart';
+import '../model/user.dart';
 
 class UserBloc extends Bloc<int, User> {
   //UserBloc(User initialState) : super(initialState);

@@ -1,10 +1,9 @@
-import 'package:flutter_http_restful_sample/cubit/countercubit_cubit.dart';
-
-import 'bloc/counter_bloc_5.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import './cubit/countercubit_cubit.dart';
+import './bloc/counter_bloc_5.dart';
 
 //MERUPAKAN BAGIAN KECIL DARI BLOC STATE MANAGEMENT
 //BEDANYA BLOC Merupakan EVENT-DRIVER atau berdasarkan event

@@ -1,6 +1,7 @@
-import 'package:flutter_http_restful_sample/model/post.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+
+import '../model/post.dart';
 
 part 'mypost_state.dart';
 

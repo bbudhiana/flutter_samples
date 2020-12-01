@@ -1,6 +1,6 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_http_restful_sample/styles/page_view.dart';
+import '../styles/page_view.dart';
 
 class MovieBox extends StatelessWidget {
   final String url;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:division/division.dart';
-import 'package:flutter_http_restful_sample/styles/custom_styles.dart';
+import '../styles/custom_styles.dart';
 
 class CustomButton extends StatefulWidget {
   final ParentStyle buttonStyle;

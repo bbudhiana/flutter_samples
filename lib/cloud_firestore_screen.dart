@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_http_restful_sample/provider/database_services.dart';
+import './provider/database_services.dart';
 
 class CloudFirestoreScreen extends StatelessWidget {
   static const routeName = "/cloud-firestore";

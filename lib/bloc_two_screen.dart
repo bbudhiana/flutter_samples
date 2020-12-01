@@ -14,7 +14,8 @@ class BlocTwoScreen extends StatelessWidget {
     //KARENA ITU WIDGET TIDAK PERLU STATEFULL LAGI
     //ColorBlocFlutter bloc = BlocProvider.of<ColorBlocFlutter>(context); //lama
     //ColorBlocFlutter bloc = context.bloc<ColorBlocFlutter>();
-    ColorBlocFlutter bloc = context.read<ColorBlocFlutter>();
+    //ColorBlocFlutter bloc = context.read<ColorBlocFlutter>();
+    ColorBlocFlutter bloc = context.watch<ColorBlocFlutter>();
 
     return Scaffold(
       floatingActionButton: Row(

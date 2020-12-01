@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_http_restful_sample/widgets/movie_box.dart';
+import './widgets/movie_box.dart';
 
 class SliderPageviewScreen extends StatelessWidget {
   static const routeName = "/slider-pageview";

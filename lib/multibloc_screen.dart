@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_http_restful_sample/ui/draft_page.dart';
-import 'package:flutter_http_restful_sample/ui/second_page.dart';
+import './ui/draft_page.dart';
+import './ui/second_page.dart';
 
 import './bloc/color_bloc.dart';
 import './bloc/counter_bloc.dart';

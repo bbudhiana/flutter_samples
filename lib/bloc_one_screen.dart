@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_http_restful_sample/provider/color_bloc.dart';
+import './provider/color_bloc.dart';
 
 /*
 global kerjanya Bloc:

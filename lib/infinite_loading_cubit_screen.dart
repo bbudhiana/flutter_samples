@@ -1,8 +1,8 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_http_restful_sample/cubit/mypost_cubit.dart';
-import 'package:flutter_http_restful_sample/ui/post_item.dart';
+import './cubit/mypost_cubit.dart';
+import './ui/post_item.dart';
 
 class InfiniteLoadingCubitScreen extends StatefulWidget {
   static const routeName = "/infinite-loading-cubit";
@@ -42,7 +42,7 @@ class _InfiniteLoadingCubitScreenState
   @override
   Widget build(BuildContext context) {
     //mybloc = context.bloc<MypostCubit>();
-    mybloc = context.read<MypostCubit>();
+    //mybloc = context.read<MypostCubit>();
     controller.addListener(onScroll);
 
     return Scaffold(
