@@ -18,6 +18,14 @@ this is sample for many implementation of flutter, such as http, provider, BLoC 
   - biometric
   - Future Builder vs FutureProvider
   - Http used for flutter
+  - Login with firebase
+  - MVVM Pattern
+  - One Signal Notification
+  - Shared Preferences
+  - Shimmer Effect
   - etc (will add for time to time)
+
+# The Good Sources for Learn Flutter Fast
+https://www.youtube.com/playlist?list=PLZQbl9Jhl-VACm40h5t6QMDB92WlopQmV by Erico Darmawan Handoyo
 
 ## I hope this repo can help anybody to understand about flutter
