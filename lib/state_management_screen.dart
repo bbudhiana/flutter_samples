@@ -4,6 +4,10 @@ import 'package:provider/provider.dart';
 import './state_management_settings.dart';
 import './provider/uiset.dart';
 
+//HOW TO USE PROVIDER PACKAGE
+//THE ChangeNotifier load in main.dart
+//ChangeNotifierProvider<UiSet>(create: (_) => UiSet()),
+
 class StateManagementScreen extends StatelessWidget {
   static const routeName = '/state-management';
   @override

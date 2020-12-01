@@ -2,17 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-//daftarkan event-eventnya
+//REGISTER THE EVENTS INTO ENUM
 enum ColorEvent { to_ember, to_light_blue }
 
-//buat kelas Bloc nya
+//CREATE BLOC CLASS
 //INI ADALAH CONTOH PENGGUNAAN BLOC TANPA LIBRARY, HANYA GUNAKAN STREAMCONTROLLER dan STREAMSINK punya dart:async
 class ColorBloc {
+  //FOR STATE STORAGE
   //menyimpan state yaitu warna oleh variable _color
   //berupa private, artinya tidak bisa diakses langsung dari luar
   Color _color = Colors.amber;
 
-  //EVENT - UNTUK MENERIMA INPUT
+  //EVENT - FOR INPUT
   //set stream controllernya, yaitu
   //1. streamcontroller untuk event color (event colornya)
   //input -> streamcontroller event -> mapEventToState Method -> streamcontroller state -> output
@@ -20,6 +21,7 @@ class ColorBloc {
   //ColorEvent adalah nama eventnya atau yang akan ditrigger dengan suatu input misal click button
   StreamController<ColorEvent> _eventController =
       StreamController<ColorEvent>();
+
   //penampung input untuk dikirim ke method mapEventToState, dibuat public agar bisa diisi dari luar
   StreamSink<ColorEvent> get eventSink => _eventController.sink;
 

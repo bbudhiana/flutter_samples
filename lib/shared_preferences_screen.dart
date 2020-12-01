@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//FOR STORAGE IN USER DEVICE WITH SIMPLE DATA
 //untuk menyimpan pemasangan di device user
 //untuk menyimpan data-data simple di aplikasi kita, contoh setting warna, on-off, dll
 //SharedPreferences in flutter uses NSUserDefaultson iOS and SharedPreferences on Android, providing a persistent store for simple data.
@@ -18,14 +19,17 @@ class _SharedPreferencesScreenState extends State<SharedPreferencesScreen> {
 
   //karena menggunakan shared preferences maka menggunakan method async
   void saveData() async {
+    //FIRST : Get instant SharedPreferences
     //ambil instant dari shared preference nya
     SharedPreferences pref = await SharedPreferences.getInstance();
 
+    //SECOND : Save into type you want
     //save yg ada di textfield dan switch di instant sharedpreferences
     pref.setString("name", controller.text);
     pref.setBool("ison", isOn);
   }
 
+  //GET VALUE FROM SharedPreferences
   //Untuk load data nya, untuk ambil nama maka keluarannya adalah String dan merupakan tipe Future
   Future<String> getName() async {
     //buat instannya
@@ -35,6 +39,7 @@ class _SharedPreferencesScreenState extends State<SharedPreferencesScreen> {
     return pref.getString("name") ?? "No Data";
   }
 
+  //GET VALUE FROM SharedPreferences
   //Untuk load data switch
   Future<bool> getOn() async {
     //buat instannya

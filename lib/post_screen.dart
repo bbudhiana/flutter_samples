@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import './provider/post_result_model.dart';
 
-//https://www.youtube.com/watch?v=WJxad_6IRUc&list=PLZQbl9Jhl-VACm40h5t6QMDB92WlopQmV&index=37
+//resource : https://www.youtube.com/watch?v=WJxad_6IRUc&list=PLZQbl9Jhl-VACm40h5t6QMDB92WlopQmV&index=37
+//How Using package:http/http.dart to Post data
 
 class PostScreen extends StatefulWidget {
   static const routeName = '/post-screen';
@@ -11,8 +12,7 @@ class PostScreen extends StatefulWidget {
 }
 
 class _PostScreenState extends State<PostScreen> {
-  //inisialisasikan dulu menjadi null
-  //PostResultModel postResult = null;
+  //Initialize postResult = null to store value from http request
   PostResultModel postResult;
 
   @override
@@ -38,10 +38,12 @@ class _PostScreenState extends State<PostScreen> {
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(0.0),
                 onPressed: () {
+                  //First : get the data
                   PostResultModel.connectToAPI("Bana", "Insinyur")
                       .then((value) {
-                    //hasilnya (value) diinput dalam variabel postResult
+                    //Second : set the data (value) to postValue
                     postResult = value;
+                    //Third : update state to rebuild widget with new value
                     setState(() {});
                   });
                 },

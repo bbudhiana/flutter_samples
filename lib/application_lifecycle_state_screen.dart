@@ -9,13 +9,12 @@ class ApplicationLifecycleStateScreen extends StatefulWidget {
 }
 
 //Untuk analisa lifecycle kita gunakan sebuah observer WidgetsBindingObserver
-//
 class _ApplicationLifecycleStateScreenState
     extends State<ApplicationLifecycleStateScreen> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    //SET this, INI ADALAH KELAS MENGOBSERVASI LIVECYCLE
+    //SET this, THIS IS FOR LIVECYCLE OBSERVATION
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -23,28 +22,32 @@ class _ApplicationLifecycleStateScreenState
   @override
   void dispose() {
     super.dispose();
-    //JIKA OBSERVER NYA SUDAH SELESAI/TIDAK DIGUNAKAN MAKA DIREMOVE KETIKA APLIKASI TUTUP
+    //IF OBSERVER NOT USED ANYMORE THEN REMOVE WHEN YOU CLOSE APPLICATION
     WidgetsBinding.instance.removeObserver(this);
   }
 
   //SETIAP ADA PERUBAHAN DARI STATE MILIK APLIKASI AKAN EKSEKUSI METHOD didChangeAppLifecycleState
+  //EVERYTIME THERE ARE ANY CHANGE FROM STATE, THEN WILL EXECUTED diChangeAppLifeCycleState
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
 
     //state dimana aplikasi masih ada di screen tapi bukan yang tampil saat ini,
-    //misal ketika ada telpon maka aplikasi jadi terhalang, atau lagi pilih2 aplikasi (tombol III di hp)
+    //STATE WHEN APPLICATION ON SCREEN, BUT NOT SHOW BECAUSE COVER BY OTHER APPS
+    //misal ketika ada telpon maka aplikasi jadi terhalang, atau lagi pilih2 aplikasi (tombol |||di hp)
     if (state == AppLifecycleState.inactive) {
       print("===> INACTIVE <===");
     }
 
     //state jika aplikasi tetap berjalan tapi sedang tidak ada di layar,
+    //STATE WHEN APPLICATION ON RUNNING, BUT NOT ON SCREEN
     //misal ketika klik tombol kotak
     if (state == AppLifecycleState.paused) {
       print("===> PAUSED <===");
     }
 
     //state ketika dari posisi state paused menjadi tampil kembali
+    //STATE WHEN APPLICATION FROM PAUSED STATE TO RUN MODE
     if (state == AppLifecycleState.resumed) {
       print("===> RESUMED <===");
     }

@@ -66,13 +66,12 @@ import 'provider/great_places.dart';
 import 'stream_provider_screen.dart';
 
 void main() async {
-  //TIGA BARIS CODE INI ADALAH : Setup HydratedStorage
-  //karena kita perlu pastikan getApplicationDocumentsDirectory sebelum runApp, maka gunakan ensureInitialized()
+  //THIS CODE FOR : Setup HydratedStorage
+  //WE MUST ENSURE getApplicationDocumentsDirectory BEFORE runApp, THEN USED ensureInitialized()
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build();
 
-  //buat HIVE
-
+  //for HIVE
   //WidgetsFlutterBinding.ensureInitialized();
   /* var appDocumentDirectory = await pathProvider
       .getApplicationDocumentsDirectory(); //cari otomatis direktori document baik android or iOS
@@ -82,7 +81,7 @@ void main() async {
   //Register/daftarkan adapter nya agar bisa terima tipe data Monster, kareva hive defaultnya hanya int dan String
   Hive.registerAdapter(MonsterAdapter());
 
-  //UNTUK DAPAT MENGGUNAKAN FIREBASE MAKA PERLU INISIALISASI, pasang paketnya firebase_core.dart
+  //YOU NEED TO INITIALIZE FIREBASE TO USE FIREBASE PACKET, using firebase_core.dart
   await Firebase.initializeApp();
 
   //ONESIGNAL NOTIFICATION
@@ -98,7 +97,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    //Penerapan multiprovider
+    //Multiprovider implementation
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UiSet>(create: (_) => UiSet()),

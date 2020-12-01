@@ -7,7 +7,7 @@ class User {
 
   User({this.id, this.name});
 
-  //factory untuk kembalikan JSON OBJECT ke OBJECT USER DART
+  //factory to return from JSON OBJECT to OBJECT USER DART
   factory User.createUser(Map<String, dynamic> object) {
     return User(
         id: object['id'].toString(),
@@ -18,22 +18,23 @@ class User {
   static Future<User> connectToAPI(String id) async {
     String apiURL = "https://reqres.in/api/users/" + id;
 
-    //http.get hanya perlu sebuah url sumber data, apiResult adalah json type
+    //http.get only need url address as data source, apiResult is json type
     //apiResult.body = {"data":{"id":12,"email":"rachel.howell@reqres.in","first_name"...
     var apiResult = await http.get(apiURL);
 
-    //apiResult.body adalah json type, ubah dari json type ke json object menggunakan json.decode
+    //apiResult.body is json type, change from json type to json object using json.decode
     var jsonObject = json.decode(apiResult.body);
 
-    //jsonObject yg di return ada 'data' dan yg lain, ambil yg 'data' maka
-    //setelah sebelumnya di casting dari json Object ke Map Object agar bisa diambil 'data' nya
+    //jsonObject contain 'data' and other, get the 'data'
+    //Casting from json Object to Map Object
+    //Casting from json Object to Map Object and then get the 'data'
     var userData = (jsonObject as Map<String, dynamic>)['data'];
 
-    //createUser menerima parameter Map dan mengubahnya menjadi Object User kemudian di return
+    //createUser accept Map Parameter and Casting to Object User then return
     return User.createUser(userData);
   }
 
-  //karena merupakan method async maka dapat dipastikan return nya adalah sebuah Future
+  //the return must a Future (Future<List(User)>), a Future List of User
   static Future<List<User>> getUsers(String page) async {
     String apiURL = "https://reqres.in/api/users?page=" + page;
 
@@ -42,23 +43,24 @@ class User {
     //{"page":2,"per_page":6,"total":12,"total_pages":2,"data":[{"id":7,"email":"michael.lawson@reqres.in","first_name":"Michael" ..
 
     var jsonObject = json.decode(apiResult.body);
-    //print(jsonObject); //Output json object (hasil convert dari json biasa)
+    //print(jsonObject); //Output json object (result convert from json)
     //{page: 2, per_page: 6, total: 12, total_pages: 2, data: [{id: 7, email: michael.lawson@reqres.in, first_name: Michael, ..
 
-    //json object di cast ke Map<String, dynamic> dan ambil hanya index 'data' yang merupakan list User
+    //json object cast to Map<String, dynamic> and get only index of 'data' that are List of User, but List<dynamic> type
     List<dynamic> listUser = (jsonObject as Map<String, dynamic>)['data'];
     //print(listUser); //Output List dari jsonObject bertype Map<String, dynamic>
     //[{id: 7, email: michael.lawson@reqres.in, first_name: Michael, last_name: Lawson, avatar: ..,
 
-    //Dari List<dynamic> kemudian di convert menjadi List<User>
+    //From List<dynamic> then convert toList<User>
     List<User> users = [];
     for (int i = 0; i < listUser.length; i++) {
+      //change dynamic to User
       users.add(User.createUser(listUser[i]));
     }
     //print(users);  //Output List dari instan User
     //[Instance of 'User', Instance of 'User', ...
 
-    //kembalikan List<User>
+    //return List<User>
     return users;
   }
 }

@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import './provider/color_bloc.dart';
 
 /*
-global kerjanya Bloc:
+Bloc Global Process: 
 event -->  Bloc  -->  Application UI
-1. click button untuk triger event
-2. Bloc akan proses event dan mengubah state menjadi state baru (mapping state)
-3. state baru itu yang dijadikan untuk mengubah UI
-Dalam Bloc ada stream controller : component yg mengkontrol aliran data
-stream terdiri 2 hal : sink (keran) dan stream (aliran data)
+1. click button for triger event
+2. Bloc will process event and change the state into new state (mapping state)
+3. New State used to change the UI
+
+in Bloc threre  : 
+1. stream controller, component that control data flow
+2. Stream that have 2 aspect : sink (keran) and stream (data flow)
+
 sink = input
-stream = aliran
+stream = flow (aliran)
 */
 
 class BlocOneScreen extends StatefulWidget {
@@ -24,6 +27,7 @@ class _BlocOneScreenState extends State<BlocOneScreen> {
   ColorBloc bloc = ColorBloc();
 
   //jika widget ditutup maka bersihkan juga stream nya
+  //YOU MUST CLEAN THE STREAM WHEN CLOSE THE WIDGET
   @override
   void dispose() {
     bloc.dispose();

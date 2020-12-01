@@ -55,7 +55,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       //postLoaded mengambil PostLoaded saat ini dari state
       PostLoaded postLoaded = state as PostLoaded;
 
-      //ambil post berikutnya dengan parameter start berasal dari jumlah post sebelumnya
+      //ambil post berikutnya dengan parameter start berasal dari jumlah post sebelumnya (limit, quantity)
       posts = await Post.connectToApi(postLoaded.posts.length, 10);
       /*
       jika posts yang terambil kosong,maka kembalikan post sebelumnya dan kasih hasReachedMax=true

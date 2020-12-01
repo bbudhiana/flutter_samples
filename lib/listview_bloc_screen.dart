@@ -28,7 +28,8 @@ class ListviewBlocScreen extends StatelessWidget {
     */
     //ProductBloc bloc = context.bloc<ProductBloc>();
     //ProductBloc bloc = context.read<ProductBloc>();
-    ProductBloc bloc = context.watch<ProductBloc>();
+    //ProductBloc bloc = context.watch<ProductBloc>();
+    ProductBloc bloc = context.select((ProductBloc productBloc) => productBloc);
 
     return Scaffold(
       appBar: AppBar(
@@ -69,6 +70,7 @@ class ListviewBlocScreen extends StatelessWidget {
                         imageUrl: products[index].imageUrl,
                         name: products[index].name,
                         price: products[index].price.toString(),
+                        notification: products[index].notification.toString(),
                         onAddCartTap: () {},
                         onDecTap: () {},
                         onIncTap: () {},
@@ -92,9 +94,15 @@ class Product {
   String imageUrl;
   String name;
   int price;
+  String notification;
 
   //constructor
-  Product({this.imageUrl = "", this.name = "", this.price = 0});
+  Product({
+    this.imageUrl = "",
+    this.name = "",
+    this.price = 0,
+    this.notification,
+  });
 }
 
 class ProductBloc extends Bloc<int, List<Product>> {
@@ -111,6 +119,7 @@ class ProductBloc extends Bloc<int, List<Product>> {
             "https://www.pantau.com/uploads/news/image/200710113543-aksi-heroik-samsiyah-tewas-selamatkan-anak-saat-mobil-hanyut-di-kalimalang-1024x535.jpg",
         name: "Product " + i.toString(),
         price: (i + 1) * 5000,
+        notification: i.isEven ? "discount " + i.toString() : "",
       ));
     }
     yield products;

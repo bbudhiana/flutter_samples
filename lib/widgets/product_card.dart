@@ -41,7 +41,7 @@ class ProductCard extends StatelessWidget {
           margin: EdgeInsets.only(left: 10, right: 10),
           duration: Duration(milliseconds: 300),
           width: 130,
-          height: (notification != null) ? 270 : 250,
+          height: (notification.length > 0) ? 275 : 250,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -59,7 +59,7 @@ class ProductCard extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Text(
-              (notification != null) ? notification : "",
+              (notification.length > 0) ? notification : "",
               style: textStyle.copyWith(
                 color: Colors.white,
                 fontSize: 12,

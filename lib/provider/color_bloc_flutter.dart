@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 //https://github.com/felangel/bloc/blob/master/packages/hydrated_bloc/README.md
 
-//tentukan eventnya
+//define the events
 enum ColorEvent { to_ember, to_light_blue }
 
 //kelas bloc ini memerlukan Event nya apa (color event), State nya (color) apa
@@ -39,6 +39,7 @@ class ColorBlocFlutter extends Bloc<ColorEvent, Color> with HydratedMixin {
   Color get initialState => super.initialState ?? Colors.amber; */
 
   //Disinilah letak method untuk menghubungkan event dengan perubahan state nya, state nya dikirim berupa Stream
+  //OUTPUT WITH YIELD FOR STREAM, IN THIS CASE COLOR OBJECT
   @override
   Stream<Color> mapEventToState(ColorEvent event) async* {
     //_color = (event == ColorEvent.to_ember) ? Colors.amber : Colors.lightBlue;
@@ -53,6 +54,7 @@ class ColorBlocFlutter extends Bloc<ColorEvent, Color> with HydratedMixin {
   Color tidak dapat disimpan ke json dalam tipe Color, karenanya gunakan state.value untuk konversi ke integer
   */
 
+  //GET COLOR fromJson
   @override
   Color fromJson(Map<String, dynamic> json) {
     try {
@@ -65,9 +67,11 @@ class ColorBlocFlutter extends Bloc<ColorEvent, Color> with HydratedMixin {
   }
 
   //Kenapa tidak Map<String, Color> toJson, karena Color tidak dapat diubah ke json, karenanya harus diubah ke int dulu dari value nya
+  //RETURN MAP Json from Color
   @override
   Map<String, int> toJson(Color state) {
     try {
+      //storage 'color' with state value
       return {'color': state.value};
     } catch (_) {
       //throw UnimplementedError();

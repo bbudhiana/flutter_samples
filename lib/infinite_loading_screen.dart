@@ -12,8 +12,9 @@ class InfiniteLoadingScreen extends StatefulWidget {
 }
 
 class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
+  //SET controller as ScrollController
   ScrollController controller = ScrollController();
-  PostBloc bloc;
+  //PostBloc bloc;
 
   void onScroll() {
     //ujung bawah screen
@@ -34,6 +35,8 @@ class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
     //context.bloc<PostBloc>()..add(PostEventInitial());
     //TRIGGER PERUBAHANNYA SAAT WIDGET INI DIBUKA DENGAN PostInitialEvent()
     //context.bloc<PostBloc>()..add(PostInitialEvent());
+
+    //read Only work when statefull widget
     context.read<PostBloc>()..add(PostInitialEvent());
 
     super.didChangeDependencies();
@@ -48,6 +51,8 @@ class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
     //bloc = context.bloc<PostBloc>();
     //bloc = context.read<PostBloc>();
     //context.watch<PostBloc>();
+
+    //FOR LISTENER THE SCROOL
     controller.addListener(onScroll);
 
     return Scaffold(
@@ -77,13 +82,16 @@ class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
             } else {
               PostLoaded postLoaded = state as PostLoaded;
               //print("===> " + postLoaded.posts.length.toString());
+              //print(postLoaded.posts.length);
               return ListView.builder(
                 //controller men-trigger event bloc
                 controller: controller,
                 itemCount: (postLoaded.hasReachedMax)
                     ? postLoaded.posts.length
+                    //tambah 1 untuk ruang buat CircularProgressIndicator()
                     : postLoaded.posts.length + 1,
                 itemBuilder: (context, index) =>
+                    //list ke length + 1 akan terisi CircularProgressIndicator(), sambil tunggu proses ambil data selesai
                     (index < postLoaded.posts.length)
                         ? PostItem(postLoaded.posts[index])
                         : Container(

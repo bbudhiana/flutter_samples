@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart';
 
 class DatabaseServices {
+  //FIRST TIME : YOU MUST set the collection from firestore
   //ini adalah set pertama kali, merupakan pointer ke collection di firestore
   static CollectionReference productCollection =
       FirebaseFirestore.instance.collection('products');
@@ -19,7 +20,7 @@ class DatabaseServices {
     });
   }
 
-  //ambil data
+  //get data product
   static Future<DocumentSnapshot> getProduct(String id) async {
     return await productCollection.doc(id).get();
   }
@@ -29,7 +30,7 @@ class DatabaseServices {
     await productCollection.doc(id).delete();
   }
 
-  //return nya adalah String, yaitu letak image nya
+  //return is Future String (image location), yaitu letak image nya
   static Future<String> uploadImage(File imageFile) async {
     //imageFile.path : alamat image kita di handphone secara penuh, termasuk folder
     //base name : kita hanya ambil file nya saja, misal sesuatu.png / sesuatu.jpg

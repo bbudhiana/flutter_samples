@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import './provider/user_model.dart';
 
+//How Using package:http/http.dart to GET data
+
 class GetScreen extends StatefulWidget {
   static const routeName = '/get-screen';
 
@@ -10,8 +12,7 @@ class GetScreen extends StatefulWidget {
 }
 
 class _GetScreenState extends State<GetScreen> {
-  //inisialisasi data
-  //User user = null;
+  //Initialize user = null to store value from http request
   User user;
 
   @override
@@ -29,8 +30,11 @@ class _GetScreenState extends State<GetScreen> {
               textColor: Colors.white,
               padding: const EdgeInsets.all(0.0),
               onPressed: () {
+                //FIRST : Connect to API with http to get data
                 User.connectToAPI("12").then((value) {
+                  //SECOND : set new value to user variable
                   user = value;
+                  //THIRD : set state to rebuild widget with new value
                   setState(() {});
                 });
               },

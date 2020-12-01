@@ -10,9 +10,9 @@ class BiometricScreen extends StatefulWidget {
 }
 
 class _BiometricScreenState extends State<BiometricScreen> {
-  //buat cek ada tidaknya biometric
+  //CHECK IF THERE IS BIOMETRIC FEATURE OR NOT
   bool isAvailable = false;
-  //buat cek kondisi autentikasi
+  //CHENCK AUTHENTICATED STATUS
   bool isAuthenticated = false;
 
   String text = "Please Check Biometric Availability";
@@ -33,6 +33,7 @@ class _BiometricScreenState extends State<BiometricScreen> {
               width: 200,
               margin: EdgeInsets.only(bottom: 6),
               child: RaisedButton(
+                //BIOMETRIC CHECK IS A FEATURE
                 onPressed: () async {
                   isAvailable = await localAuthentication.canCheckBiometrics;
                   if (isAvailable) {

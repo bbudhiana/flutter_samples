@@ -3,16 +3,21 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class PostResultModel {
-  //1. siapkan field-field yang dibutuhkan
+  //1. fields need for store data
   String id;
   String name;
   String job;
   String created;
 
-  //2.masukkan dalam constructor nya
+  //2. the constructor for initialize the class
   PostResultModel({this.id, this.name, this.job, this.created});
 
-  //factory method merupakan method untuk mapping dari json object ke object dart
+  //factory method are method for mapping from json object to object dart
+  //Factory constructors
+  //- a factory constructor might return an instance from a cache
+  //- it might return an instance of a subtype
+  //- Another use case for factory constructors is initializing a final variable using logic that can’t be handled in the initializer list.
+  //https://dart.dev/guides/language/language-tour#constructors
   factory PostResultModel.createPostResult(Map<String, dynamic> object) {
     return PostResultModel(
       id: object['id'],
@@ -22,23 +27,23 @@ class PostResultModel {
     );
   }
 
-  //method untuk menghubungkan aplikasi dengan API
-  //karena merupakan method async maka dapat dipastikan return nya adalah sebuah Future
+  //Future is static because its own by the class
   static Future<PostResultModel> connectToAPI(String name, String job) async {
-    //method 'POS' url ini membutuhkan map name dan job
+    //method 'POS' url need map name dan job
     String apiURL = "https://reqres.in/api/users";
 
-    //kirimkan parameter yang dibutuhkan {"name":name, "job":job}
+    //send parameter2 need by apiURL {"name":name, "job":job}
     //apiResult = {"name":"Bana","job":"Insinyur","id":"100","createdAt":"2020-07-12T15:09:30.531Z"}
     //berupa json type
 
-    //1. KIRIMKAN PARAMETER YANG DIBUTUHKAN OLEH API, DENGAN KIRIMKAN MAP atau JSON
-    //buat var MAP
+    //1. SEND PARAMETER NEEDS BY API, WITH MAP atau JSON TYPE
+    //with var MAP TYPE
     Map request = {
       'name': name,
       'job': job,
     };
-    //http.post membutuhkan alamat url untuk post dan variabel Map untuk kirim request
+
+    //http.post need url address to post and  Map Type variable to send request
     //[body] sets the body of the request. It can be a [String], a [List] or a [Map<String, String>]
     //If it's a String, it's encoded using [encoding] and used as the body of the request
     //If [body] is a List, it's used as a list of bytes for the body of the request.
@@ -49,7 +54,7 @@ class PostResultModel {
     );
 
     /* 
-     //jika mau gunakan json (bukan Map) maka headers harus diset dan body lakukan encode dulu
+     //if used json (not Map) then headers must set and body to encode first
       var apiResult = await http.post(
       apiURL,
       headers: {
@@ -57,18 +62,18 @@ class PostResultModel {
         "Accept": "application/json",
       },
       body: json.encode(request),
-    ); */
+    ); 
+    */
 
-    //2. UBAH JSON YANG DIDAPAT MENJADI JSON OBJECT DENGAN METHOD DECODE, AKAN MENJADI OBJECT MAP STRING=>DYNAMIC
-    //Jadikan hasil ambilan dari API ke jsonObject
+    //2. CHANGE JSON RESULT TO JSON OBJECT WITH DECODE METHOD, WILL RESULT OBJECT MAP STRING=>DYNAMIC
     //jsonObject = {name: Bana, job: Insinyur, id: 640, createdAt: 2020-07-12T15:12:23.797Z}
-    //kemudian dari json type ke jsonObject  Dart
+    //and also from json type to jsonObject  Dart
     var jsonObject = json.decode(apiResult.body);
     //print(jsonObject);
 
-    //3. KEMBALIKAN DALAM BENTUK OBJECT POSTRESULTMODEL dengan FACTORY METHOD POSTRESULTMODEL.CREATEPOSTRESULT(MAP)
-    //kembalikan setelah factory mengubah dari json oject ke tipe object (object PostResult) dart dengan tipe data Map
-    //kemudian dari jsonObject Dart ke PostResultModel
+    //3.RETURN IN OBJECT POSTRESULTMODEL WITH FACTORY METHOD POSTRESULTMODEL.CREATEPOSTRESULT(MAP)
+    //return after factory change from json oject to object type (object PostResult) dart with data Map type
+    //and also from jsonObject Dart to PostResultModel
     return PostResultModel.createPostResult(jsonObject);
   }
 }

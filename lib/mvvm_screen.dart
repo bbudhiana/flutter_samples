@@ -19,8 +19,9 @@ class MvvmScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //ambil bloc nya
-    //UserBloc bloc = context.bloc<UserBloc>();
-    UserBloc bloc = context.watch<UserBloc>();
+    //UserBloc bloc = context.bloc<UserBloc>(); //only work if stateful widget
+    //UserBloc bloc = context.watch<UserBloc>();
+    UserBloc bloc = context.select((UserBloc userBloc) => userBloc);
 
     return Scaffold(
         appBar: AppBar(
@@ -43,6 +44,7 @@ class MvvmScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
             ),
+            //Bloc nya UserBloc, state return nya User
             BlocBuilder<UserBloc, User>(
               builder: (context, user) =>
                   (user is UninitializedUser) ? Container() : UserCard(user),
