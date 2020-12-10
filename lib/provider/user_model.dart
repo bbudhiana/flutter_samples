@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+//https://flutter.dev/docs/cookbook/networking/fetch-data
 class User {
   String id;
   String name;
@@ -57,6 +58,13 @@ class User {
       //change dynamic to User
       users.add(User.createUser(listUser[i]));
     }
+
+    //dengan Cara memanfaatkan fungsi map nya list
+    /*
+    List<User> users;
+    users = listUser.map((user) => User.createUser(user)).toList();
+    */
+
     //print(users);  //Output List dari instan User
     //[Instance of 'User', Instance of 'User', ...
 

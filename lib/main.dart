@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_samples/infinite_stream_builder_screen.dart';
 import './application_lifecycle_state_screen.dart';
 import './biometric_screen.dart';
 import './bloc/counter_bloc.dart';
@@ -54,6 +55,7 @@ import 'bloc/color_bloc.dart';
 import 'bloc/counter_bloc_5.dart';
 import 'bloc_two_screen.dart';
 import 'future_provider_screen.dart';
+import 'infinite_future_builder_screen.dart';
 import 'listview_bloc_screen.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -172,6 +174,8 @@ class MyApp extends StatelessWidget {
             MultiblocScreen.routeName: (ctx) => MultiblocScreen(),
             DropdownScreen.routeName: (ctx) => DropdownScreen(),
             HiveScreen.routeName: (ctx) => HiveScreen(),
+            InfiniteFutureBuilderScreen.routeName: (ctx) =>
+                InfiniteFutureBuilderScreen(),
             InfiniteLoadingScreen.routeName: (ctx) => InfiniteLoadingScreen(),
             InfiniteLoadingCubitScreen.routeName: (ctx) => BlocProvider(
                 create: (context) => MypostCubit(),
@@ -343,6 +347,13 @@ class MyHomePage extends StatelessWidget {
             iconSubject: Icons.data_usage,
             route: HiveScreen.routeName,
           ),
+          /* ListSubject(
+            number: _i++,
+            title: 'Infinite Loading with Future Builder',
+            subTitle: 'List infinite menggunakan Future Builder',
+            iconSubject: Icons.info_outline,
+            route: InfiniteFutureBuilderScreen.routeName,
+          ), */
           ListSubject(
             number: _i++,
             title: 'Infinite Loading with BLoC',

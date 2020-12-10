@@ -30,8 +30,7 @@ class CardWithMessageScreen extends StatelessWidget {
                   onIncTap: () {
                     productState.quantity++;
                   },
-                  notification:
-                      (productState.quantity > 5) ? "Diskon 10%" : null,
+                  notification: (productState.quantity > 5) ? "Diskon 10%" : "",
                   imageUrl:
                       "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
             ),
