@@ -48,6 +48,6 @@ google-services.json
 # Constanta
 flutter_samples_params.dart
 
-android/app/src/main/AndroidManifest.xml
+AndroidManifest.xml
 
 AppDelegate.swift
