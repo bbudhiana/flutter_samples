@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_samples/infinite_stream_builder_screen.dart';
+import 'package:flutter_samples/screens/place_detail_screen.dart';
 import './application_lifecycle_state_screen.dart';
 import './biometric_screen.dart';
 import './bloc/counter_bloc.dart';
@@ -206,6 +207,7 @@ class MyApp extends StatelessWidget {
                 FutureProviderBuilderScreen(),
             GreatPlacesScreen.routeName: (ctx) => GreatPlacesScreen(),
             AddPlaceScreen.routename: (ctx) => AddPlaceScreen(),
+            PlaceDetailScreen.routeName: (ctx) => PlaceDetailScreen(),
           },
         ),
       ),

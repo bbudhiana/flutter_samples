@@ -52,12 +52,25 @@ class _MapScreenState extends State<MapScreen> {
           ),
           zoom: 16,
         ),
+        //jika dapat di 'Select' maka gunakan funtion _selectLocation, selain itu kasih null saja
+        //isSelecting, jika false maka untuk tampilan view saja (setiap klik tidak berubah),
+        //isSelecting, jika true maka untuk tampilan create dan update (perubahan di akomodir _selectLocation)
         onTap: widget.isSelecting ? _selectLocation : null,
         //tipe data markers adalah Set {} , berisi hanya value seperti halnya List, bukan key-value seperti halnya Map
         //hal spesial Set adalah setiap values nya di pastikan unik, jika kita tambahkan sesuatu yg sudah ada di set maka tidak akan ditambahkan
-        markers: _pickedLocation == null
+        markers: (_pickedLocation == null && widget.isSelecting)
             ? null
-            : {Marker(markerId: MarkerId('m1'), position: _pickedLocation)},
+            : {
+                Marker(
+                  markerId: MarkerId('m1'),
+                  //posisi adalah titik yg di pilih (picked) atau dari inisialisasi
+                  position: _pickedLocation ??
+                      LatLng(
+                        widget.initialLocation.latitude,
+                        widget.initialLocation.longitude,
+                      ),
+                )
+              },
       ),
     );
   }

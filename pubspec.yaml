@@ -54,7 +54,7 @@ dependencies:
   onesignal_flutter: ^2.6.1
   path: ^1.7.0
   path_provider: ^1.6.21
-  provider: ^4.3.1
+  provider: ^4.3.2+3
   replay_bloc: ^0.0.1-dev.2
   shared_preferences: ^0.5.8
   shimmer: ^1.1.1
