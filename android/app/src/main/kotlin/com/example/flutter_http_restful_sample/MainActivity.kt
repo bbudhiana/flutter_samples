@@ -1,4 +1,4 @@
-package com.example.flutter_http_restful_sample
+package com.example.flutter_samples
 
 import io.flutter.embedding.android.FlutterActivity
 

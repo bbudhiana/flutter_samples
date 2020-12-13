@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/image_input.dart';
 import '../provider/great_places.dart';
+import '../widgets/location_input.dart';
+import '../model/place.dart';
 
 class AddPlaceScreen extends StatefulWidget {
   static const routename = '/add-place';
@@ -14,19 +16,26 @@ class AddPlaceScreen extends StatefulWidget {
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final _titleController = TextEditingController();
   File _pickedImage;
+  PlaceLocation _pickedLocation;
 
   //untuk nampung hasil olahan dari ImageInput, hasil ImageInput dimasukkan dalam _pickedImage
   void _selectImage(File pickedImage) {
     _pickedImage = pickedImage;
   }
 
+  void _selectPlace(double lat, double lng) {
+    _pickedLocation = PlaceLocation(latitude: lat, longitude: lng);
+  }
+
   void _savePlace() {
-    if (_titleController.text.isEmpty || _pickedImage == null) {
+    if (_titleController.text.isEmpty ||
+        _pickedImage == null ||
+        _pickedLocation == null) {
       return;
     }
     //save tapi tidak perlu rebuild widget nya
     Provider.of<GreatPlaces>(context, listen: false)
-        .addPlace(_titleController.text, _pickedImage);
+        .addPlace(_titleController.text, _pickedImage, _pickedLocation);
     //kembali ke awal page
     Navigator.of(context).pop();
   }
@@ -61,6 +70,10 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       height: 10,
                     ),
                     ImageInput(_selectImage),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    LocationInput(_selectPlace),
                   ],
                 ),
               ),

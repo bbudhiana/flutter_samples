@@ -37,6 +37,7 @@ dependencies:
   flutter_bloc: ^6.1.1
   flutter_mobx: ^1.1.0+2
   google_fonts: ^1.1.0
+  google_maps_flutter: ^1.0.6
   google_sign_in: ^4.5.4
   hive: ^1.4.4
   hive_flutter: ^0.3.1
@@ -47,6 +48,7 @@ dependencies:
   json_serializable: ^3.4.1
   loadmore: ^1.0.4
   local_auth: ^0.6.3+2
+  location: ^3.1.0
   mobx: ^1.2.1+2
   mobx_codegen: ^1.1.0+1
   onesignal_flutter: ^2.6.1

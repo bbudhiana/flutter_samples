@@ -9,14 +9,14 @@
     "client_info": {
       "mobilesdk_app_id": "1:690259357880:android:1f9d0c3378a033be37c44d",
       "android_client_info": {
-        "package_name": "com.example.flutter_http_restful_sample"
+        "package_name": "com.example.flutter_samples"
       }
     },
     "oauth_client": [{
         "client_id": "690259357880-sl65p3m7eo677indk40kne5g39umvi52.apps.googleusercontent.com",
         "client_type": 1,
         "android_info": {
-          "package_name": "com.example.flutter_http_restful_sample",
+          "package_name": "com.example.flutter_samples",
           "certificate_hash": "29b8aed4f62317c56b8e3d95cbf3df4fc089ca74"
         }
       },
