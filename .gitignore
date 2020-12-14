@@ -33,8 +33,6 @@
 # Web related
 lib/generated_plugin_registrant.dart
 
-android/app/src/main/AndroidManifest.xml
-
 # Symbolication related
 app.*.symbols
 
