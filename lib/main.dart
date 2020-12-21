@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_samples/bloc/counterthree_bloc.dart';
 import 'package:flutter_samples/infinite_stream_builder_screen.dart';
 import 'package:flutter_samples/screens/place_detail_screen.dart';
 import './application_lifecycle_state_screen.dart';
@@ -54,9 +55,11 @@ import './post_screen.dart';
 import './provider/uiset.dart';
 import 'bloc/color_bloc.dart';
 import 'bloc/counter_bloc_5.dart';
+import 'bloc_three_screen.dart';
 import 'bloc_two_screen.dart';
 import 'future_provider_screen.dart';
 import 'infinite_future_builder_screen.dart';
+import 'infinite_loading_cubit_select_screen.dart';
 import 'listview_bloc_screen.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -130,6 +133,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<CountercCubit>(
             create: (context) => CountercCubit(),
+          ),
+          BlocProvider<CounterthreeBloc>(
+            create: (context) => CounterthreeBloc(),
           )
         ],
         child: MaterialApp(
@@ -161,6 +167,7 @@ class MyApp extends StatelessWidget {
                 create: (context) => ColorBlocFlutter(), child: BlocTwoScreen()), */
             //USING MULTIBLOCPROVIDER
             BlocTwoScreen.routeName: (ctx) => BlocTwoScreen(),
+            BlocThreeScreen.routeName: (ctx) => BlocThreeScreen(),
             TimerScreen.routeName: (ctx) => TimerScreen(),
             ProgressBarProvider.routeName: (ctx) => ProgressBarProvider(),
             CardWithMessageScreen.routeName: (ctx) => CardWithMessageScreen(),
@@ -181,6 +188,9 @@ class MyApp extends StatelessWidget {
             InfiniteLoadingCubitScreen.routeName: (ctx) => BlocProvider(
                 create: (context) => MypostCubit(),
                 child: InfiniteLoadingCubitScreen()),
+            InfiniteLoadingCubitSelectScreen.routeName: (ctx) => BlocProvider(
+                create: (context) => MypostCubit(),
+                child: InfiniteLoadingCubitSelectScreen()),
             MobxStateScreen.routeName: (ctx) => MobxStateScreen(),
             DivisionScreen.routeName: (ctx) => DivisionScreen(),
             SliderPageviewScreen.routeName: (ctx) => SliderPageviewScreen(),
@@ -294,6 +304,13 @@ class MyHomePage extends StatelessWidget {
           ),
           ListSubject(
             number: _i++,
+            title: 'Bloc State Management 3 - update version 6.1.1',
+            subTitle: 'Bloc 3',
+            iconSubject: Icons.block,
+            route: BlocThreeScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
             title: 'Timer',
             subTitle: 'Menggunakan Timer',
             iconSubject: Icons.timer,
@@ -369,6 +386,13 @@ class MyHomePage extends StatelessWidget {
             subTitle: 'List infinite menggunakan BLoC Cubit',
             iconSubject: Icons.info_outline,
             route: InfiniteLoadingCubitScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Infinite Loading with BLoC Cubit',
+            subTitle: 'List infinite menggunakan BLoC Cubit - Select',
+            iconSubject: Icons.info_outline,
+            route: InfiniteLoadingCubitSelectScreen.routeName,
           ),
           ListSubject(
             number: _i++,

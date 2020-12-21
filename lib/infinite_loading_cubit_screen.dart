@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import './cubit/mypost_cubit.dart';
 import './ui/post_item.dart';
+import 'model/post.dart';
 
 class InfiniteLoadingCubitScreen extends StatefulWidget {
   static const routeName = "/infinite-loading-cubit";
@@ -53,6 +54,7 @@ class _InfiniteLoadingCubitScreenState
       body: Container(
         margin: EdgeInsets.only(left: 20, right: 20),
         child: BlocBuilder<MypostCubit, MypostState>(
+          //cubit: mybloc, //optional
           builder: (context, state) {
             MyPostLoaded postLoaded = state as MyPostLoaded;
             //Jika sudah sampai akhir record

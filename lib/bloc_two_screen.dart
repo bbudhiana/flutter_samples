@@ -14,7 +14,7 @@ class BlocTwoScreen extends StatelessWidget {
     //TIDAK PERLU ADA DISPOSE LAGI KARENA SUDAH DI TANGANI BLOCPROVIDER , KARENA ITU WIDGET TIDAK PERLU STATEFULL LAGI
     //ColorBlocFlutter bloc = BlocProvider.of<ColorBlocFlutter>(context); //lama
     //ColorBlocFlutter bloc = context.bloc<ColorBlocFlutter>();
-    //ColorBlocFlutter bloc = context.read<ColorBlocFlutter>(); //We can use context.read in StatefulWidget, so will error this
+    //ColorBlocFlutter bloc = context.read<ColorBlocFlutter>(); //We can use context.read in StatefulWidget only, so will error this
     //ColorBlocFlutter bloc = context.watch<ColorBlocFlutter>(); //If you want performance then use a select
     ColorBlocFlutter bloc =
         context.select((ColorBlocFlutter colorBlocFlutter) => colorBlocFlutter);

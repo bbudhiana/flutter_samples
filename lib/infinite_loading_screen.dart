@@ -38,6 +38,7 @@ class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
 
     //read Only work when statefull widget
     context.read<PostBloc>()..add(PostInitialEvent());
+    //context.read<PostBloc>().add(PostEvent());
 
     super.didChangeDependencies();
   }

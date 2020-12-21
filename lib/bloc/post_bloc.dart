@@ -38,6 +38,27 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   Stream<PostState> mapEventToState(PostEvent event) async* {
     List<Post> posts;
 
+    /* if (event is PostEvent) {
+      if (state is PostUninitialized) {
+        posts = await Post.connectToApi(0, 10);
+        yield PostLoaded(posts: posts, hasReachedMax: false);
+      } else {
+        //print('Post lebih dari 10');
+        //postLoaded mengambil PostLoaded saat ini dari state
+        PostLoaded postLoaded = state as PostLoaded;
+
+        //ambil post berikutnya dengan parameter start berasal dari jumlah post sebelumnya (limit, quantity)
+        posts = await Post.connectToApi(postLoaded.posts.length, 10);
+        /*
+        jika posts yang terambil kosong,maka kembalikan post sebelumnya dan kasih hasReachedMax=true
+        jika post belum empty, maka kembalikan PostLoaded = post lalu (postLoaded.posts) + post saat ini (posts) dan hasReachedMax=false
+        */
+        yield (posts.isEmpty)
+            ? postLoaded.copyWith(hasReachedMax: true)
+            : PostLoaded(posts: postLoaded.posts + posts, hasReachedMax: false);
+      }
+    } */
+
     //sudah pernah ke halaman ini (sudah terjadi PostUninitialized), maka PostInitialEvent ubah lagi ke PostUninitialized agar load data terbaru
     if (event is PostInitialEvent) {
       //print('Post inisial');

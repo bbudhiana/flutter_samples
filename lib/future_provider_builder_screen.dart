@@ -115,6 +115,15 @@ class MyApp extends StatelessWidget {
              jika gunakan consumer maka proses hanya rebuild dari dalam Consumer
           2. coba lihat untuk FutureBuilder, setelah proses ambil data selesai maka rebuild  mulai dari ListView.Builder
           3. StreamBuilder selalu lihat/listen perubahan datanya, membuatnya terus menerus menghandle perubahan data
+
+          state dalam StreamBuilder :
+          The usual flow of state is as follows:
+
+          [none], maybe with some initial data.
+          [waiting], indicating that the asynchronous operation has begun, typically with the data being null.
+          [active], with data being non-null, and possible changing over time.
+          [done], with data being non-null.
+          
         */
         Padding(
           padding: EdgeInsets.all(10.0),
