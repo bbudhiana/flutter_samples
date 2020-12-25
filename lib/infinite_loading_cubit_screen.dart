@@ -26,6 +26,11 @@ class _InfiniteLoadingCubitScreenState
     //posisi kini screen
     double currentScroll = controller.position.pixels;
 
+    /*
+    print('currentScroll : ${currentScroll}');
+    print('maxScroll : ${maxScroll}');
+    */
+
     if (currentScroll == maxScroll) {
       //context.bloc<MypostCubit>().cubitMyPost();
       context.read<MypostCubit>().cubitMyPost();
