@@ -47,6 +47,12 @@
 	<string>Need to get your location!</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to let you pick an image.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access camera to let you pick an image.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access microphone to let you pick an audio.</string>
 
 </dict>
 </plist>
