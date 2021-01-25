@@ -2,7 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_samples/bloc/counterthree_bloc.dart';
+import 'package:flutter_samples/camera_guide_screen.dart';
 import 'package:flutter_samples/infinite_stream_builder_screen.dart';
+import 'package:flutter_samples/location_real_screen.dart';
+import 'package:flutter_samples/map_here_screen.dart';
 import 'package:flutter_samples/screens/place_detail_screen.dart';
 import './application_lifecycle_state_screen.dart';
 import './biometric_screen.dart';
@@ -64,6 +67,9 @@ import 'listview_bloc_screen.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
+//HERE MAP PAKET
+import 'package:here_sdk/core.dart';
+
 //import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -72,6 +78,9 @@ import 'provider/great_places.dart';
 import 'stream_provider_screen.dart';
 
 void main() async {
+  //untuk aktifkan sdk HERE MAP (here.com)
+  SdkContext.init(IsolateOrigin.main);
+
   //THIS CODE FOR : Setup HydratedStorage
   //WE MUST ENSURE getApplicationDocumentsDirectory BEFORE runApp, THEN USED ensureInitialized()
   WidgetsFlutterBinding.ensureInitialized();
@@ -218,6 +227,9 @@ class MyApp extends StatelessWidget {
             GreatPlacesScreen.routeName: (ctx) => GreatPlacesScreen(),
             AddPlaceScreen.routename: (ctx) => AddPlaceScreen(),
             PlaceDetailScreen.routeName: (ctx) => PlaceDetailScreen(),
+            CameraGuideScreen.routeName: (ctx) => CameraGuideScreen(),
+            MapHereScreen.routeName: (ctx) => MapHereScreen(),
+            LocationRealScreen.routeName: (ctx) => LocationRealScreen(),
           },
         ),
       ),
@@ -528,6 +540,27 @@ class MyHomePage extends StatelessWidget {
             subTitle: 'Untuk melihat bagaimana Google Map bekerja',
             iconSubject: Icons.replay,
             route: GreatPlacesScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Camera with Guide - Implement Camera',
+            subTitle: 'Untuk melihat bagaimana Camera bekerja dengan Guide',
+            iconSubject: Icons.camera,
+            route: CameraGuideScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Map - Menggunakan Here Map',
+            subTitle: 'Map dengan menggunakan 3rd Party Here.com',
+            iconSubject: Icons.map_sharp,
+            route: MapHereScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Location - Real Update location of User',
+            subTitle: 'Mendeteksi longitude dan latitude secara realt ime',
+            iconSubject: Icons.location_on,
+            route: LocationRealScreen.routeName,
           ),
         ],
       ),
