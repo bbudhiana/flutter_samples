@@ -17,23 +17,63 @@ class LocationService {
   Stream<UserLocation> get locationStream => _locationStreamController.stream;
 
   LocationService() {
-    //minta permisi dulu, return nya adalah permissionStatus
-    location.requestPermission().then((permissionStatus) {
-      if (permissionStatus == PermissionStatus.granted) {
-        //jika sudah ada ijin gunakan location maka location bisa gunakan method onLocationChanged
-        //method ini untuk mendeteksi perubahan hasil dari 'listen', hasil listen adalah data lokasi (locationData)
-        location.onLocationChanged.listen((locationData) {
-          if (locationData != null) {
-            //kemudian hasil data locationData diinput dalam Stream UserLocation di variable _locationStreamController
-            //agar bisa dialirkan
-            _locationStreamController.add(
-              UserLocation(
-                  latitude: locationData.latitude,
-                  longitude: locationData.longitude),
-            );
+    //check dulu apakah enable service nya atau belum
+    location.serviceEnabled().then((serviceEnable) {
+      if (!serviceEnable) {
+        //minta di enable dulu service location nya
+        location.requestService().then((serviceEnable) {
+          if (!serviceEnable) {
+            return;
           }
         });
       }
+    });
+
+    //check dulu apakah sudah disetujui permisi penggunaan location
+    location.hasPermission().then((permissionGranted) {
+      //check dulu apakah sudah disetujui, jika denied maka minta permisi
+      if (permissionGranted == PermissionStatus.denied) {
+        //minta permisi dulu, return nya adalah permissionStatus
+        location.requestPermission().then((permissionStatus) {
+          if (permissionStatus == PermissionStatus.denied) {
+            return;
+          }
+        });
+      }
+      //jika sudah ada ijin gunakan location maka location bisa gunakan method onLocationChanged
+      //method ini untuk mendeteksi perubahan hasil dari 'listen', hasil listen adalah data lokasi (locationData)
+      location.onLocationChanged.listen((locationData) {
+        if (locationData != null) {
+          //kemudian hasil data locationData diinput dalam Stream UserLocation di variable _locationStreamController
+          //agar bisa dialirkan
+          _locationStreamController.add(
+            UserLocation(
+                latitude: locationData.latitude,
+                longitude: locationData.longitude),
+          );
+        }
+      });
+
+      /*
+      //minta permisi dulu, return nya adalah permissionStatus
+        location.requestPermission().then((permissionStatus) {
+          if (permissionStatus == PermissionStatus.granted) {
+            //jika sudah ada ijin gunakan location maka location bisa gunakan method onLocationChanged
+            //method ini untuk mendeteksi perubahan hasil dari 'listen', hasil listen adalah data lokasi (locationData)
+            location.onLocationChanged.listen((locationData) {
+              if (locationData != null) {
+                //kemudian hasil data locationData diinput dalam Stream UserLocation di variable _locationStreamController
+                //agar bisa dialirkan
+                _locationStreamController.add(
+                  UserLocation(
+                      latitude: locationData.latitude,
+                      longitude: locationData.longitude),
+                );
+              }
+            });
+          }
+        });
+      */
     });
   }
 
