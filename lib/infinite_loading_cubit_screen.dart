@@ -40,9 +40,17 @@ class _InfiniteLoadingCubitScreenState
   @override
   void didChangeDependencies() {
     //context.bloc<MypostCubit>().cubitMyPost();
+
+    //TRIGGER PERTAMA KALI UBAH STATE NYA OLEH CUBIT
     context.read<MypostCubit>().cubitMyPost();
 
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -118,7 +126,7 @@ class _InfiniteLoadingCubitScreenState
 
   void _showRecordHasReachedMax(BuildContext context) {
     //_scaffoldKey.currentState
-    Scaffold.of(context)
+    ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(SnackBar(
         content: Row(
@@ -130,5 +138,17 @@ class _InfiniteLoadingCubitScreenState
         ),
         backgroundColor: Color(0xff1565c0),
       ));
+    /* Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Record has reached maximum..."),
+            Icon(Icons.done),
+          ],
+        ),
+        backgroundColor: Color(0xff1565c0),
+      )); */
   }
 }

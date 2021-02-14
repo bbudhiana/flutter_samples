@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_samples/bloc/counterthree_bloc.dart';
+//import 'package:flutter_samples/bloc/infiniteversion2/post_bloc_version2.dart';
 import 'package:flutter_samples/camera_guide_screen.dart';
 import 'package:flutter_samples/infinite_stream_builder_screen.dart';
 import 'package:flutter_samples/location_real_screen.dart';
@@ -58,14 +59,17 @@ import './post_screen.dart';
 import './provider/uiset.dart';
 import 'bloc/color_bloc.dart';
 import 'bloc/counter_bloc_5.dart';
+import 'bloc/infiniteversion2/bloc.dart';
 import 'bloc_three_screen.dart';
 import 'bloc_two_screen.dart';
 import 'future_provider_screen.dart';
 import 'infinite_future_builder_screen.dart';
 import 'infinite_loading_cubit_select_screen.dart';
+import 'infinite_loading_screen2.dart';
 import 'listview_bloc_screen.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:http/http.dart' as http;
 
 //HERE MAP PAKET
 import 'package:here_sdk/core.dart';
@@ -134,6 +138,13 @@ class MyApp extends StatelessWidget {
             //create: (context) => PostBloc()..add(PostEvent()),
             create: (context) => PostBloc(),
           ),
+          BlocProvider<PostBlocVersion2>(
+            //agar langsung memanggil data yang pertama, maka gunakan add(PostEvent())
+            //create: (context) =>PostBlocVersion2(httpClient: http.Client())..add(PostFetched()),
+            //create: (context) => PostBlocVersion2(httpClient: http.Client())..add(PostEventInitial()),
+            create: (context) => PostBlocVersion2(httpClient: http.Client()),
+            //create: (context) => PostBlocVersion2()..add(PostFetched()),
+          ),
           BlocProvider<CounterBloc5>(
             create: (context) => CounterBloc5(),
           ),
@@ -194,6 +205,7 @@ class MyApp extends StatelessWidget {
             InfiniteFutureBuilderScreen.routeName: (ctx) =>
                 InfiniteFutureBuilderScreen(),
             InfiniteLoadingScreen.routeName: (ctx) => InfiniteLoadingScreen(),
+            InfiniteLoadingScreen2.routeName: (ctx) => InfiniteLoadingScreen2(),
             InfiniteLoadingCubitScreen.routeName: (ctx) => BlocProvider(
                 create: (context) => MypostCubit(),
                 child: InfiniteLoadingCubitScreen()),
@@ -391,6 +403,13 @@ class MyHomePage extends StatelessWidget {
             subTitle: 'List infinite menggunakan BLoC',
             iconSubject: Icons.info_outline,
             route: InfiniteLoadingScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Infinite Loading with BLoC',
+            subTitle: 'List infinite menggunakan BLoC - Version 2',
+            iconSubject: Icons.info_outline,
+            route: InfiniteLoadingScreen2.routeName,
           ),
           ListSubject(
             number: _i++,
