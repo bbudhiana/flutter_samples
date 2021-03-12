@@ -8,6 +8,7 @@ import 'package:flutter_samples/infinite_stream_builder_screen.dart';
 import 'package:flutter_samples/location_real_screen.dart';
 import 'package:flutter_samples/map_here_screen.dart';
 import 'package:flutter_samples/screens/place_detail_screen.dart';
+import 'package:flutter_samples/slidable_screen.dart';
 import './application_lifecycle_state_screen.dart';
 import './biometric_screen.dart';
 import './bloc/counter_bloc.dart';
@@ -242,6 +243,7 @@ class MyApp extends StatelessWidget {
             CameraGuideScreen.routeName: (ctx) => CameraGuideScreen(),
             MapHereScreen.routeName: (ctx) => MapHereScreen(),
             LocationRealScreen.routeName: (ctx) => LocationRealScreen(),
+            SlidableScreen.routeName: (ctx) => SlidableScreen(),
           },
         ),
       ),
@@ -577,9 +579,16 @@ class MyHomePage extends StatelessWidget {
           ListSubject(
             number: _i++,
             title: 'Location - Real Update location of User',
-            subTitle: 'Mendeteksi longitude dan latitude secara realt ime',
+            subTitle: 'Mendeteksi longitude dan latitude secara realt time',
             iconSubject: Icons.location_on,
             route: LocationRealScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Slidable Example',
+            subTitle: 'Contoh penggunaan slidable di list item',
+            iconSubject: Icons.slideshow,
+            route: SlidableScreen.routeName,
           ),
         ],
       ),
