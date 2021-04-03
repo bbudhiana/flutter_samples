@@ -32,8 +32,7 @@ class _BiometricScreenState extends State<BiometricScreen> {
             Container(
               width: 200,
               margin: EdgeInsets.only(bottom: 6),
-              child: RaisedButton(
-                //BIOMETRIC CHECK IS A FEATURE
+              child: ElevatedButton(
                 onPressed: () async {
                   isAvailable = await localAuthentication.canCheckBiometrics;
                   if (isAvailable) {
@@ -54,11 +53,12 @@ class _BiometricScreenState extends State<BiometricScreen> {
             ),
             SizedBox(
               width: 200,
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: isAvailable
                     ? () async {
-                        isAuthenticated = await localAuthentication
-                            .authenticateWithBiometrics(
+                        isAuthenticated =
+                            await localAuthentication.authenticate(
+                          biometricOnly: true,
                           localizedReason: "Please authenticated",
                           stickyAuth: true,
                           useErrorDialogs: true,

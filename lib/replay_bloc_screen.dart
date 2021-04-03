@@ -43,7 +43,7 @@ class ReplayBlocScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: () {
                       //context.bloc<CounterbBloc>().add(Incement());
                       context.read<CounterbBloc>().add(Incement());
@@ -57,7 +57,7 @@ class ReplayBlocScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: () {
                           //context.bloc<CounterbBloc>().undo();
                           context.read<CounterbBloc>().undo();
@@ -71,7 +71,7 @@ class ReplayBlocScreen extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: () {
                           //context.bloc<CounterbBloc>().redo();
                           context.read<CounterbBloc>().redo();
@@ -124,7 +124,7 @@ class ReplayBlocScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () {
                         //context.bloc<CountercCubit>().increment();
                         context.read<CountercCubit>().increment();
@@ -138,7 +138,7 @@ class ReplayBlocScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        RaisedButton(
+                        ElevatedButton(
                           onPressed: () {
                             //context.bloc<CountercCubit>().undo();
                             context.read<CountercCubit>().undo();
@@ -152,7 +152,7 @@ class ReplayBlocScreen extends StatelessWidget {
                         SizedBox(
                           width: 10,
                         ),
-                        RaisedButton(
+                        ElevatedButton(
                           onPressed: () {
                             //context.bloc<CountercCubit>().redo();
                             context.read<CountercCubit>().redo();

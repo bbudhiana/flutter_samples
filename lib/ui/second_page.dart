@@ -34,38 +34,47 @@ class SecondPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: () {
                       colorBloc.add(ColorEvent.toPink);
                     },
-                    color: Colors.pink,
-                    shape: (color == Colors.pink)
-                        ? CircleBorder(
-                            side: BorderSide(color: Colors.black, width: 3),
-                          )
-                        : CircleBorder(),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.pink,
+                      shape: (color == Colors.pink)
+                          ? CircleBorder(
+                              side: BorderSide(color: Colors.black, width: 3),
+                            )
+                          : CircleBorder(),
+                    ),
+                    child: Text(''),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: () {
                       colorBloc.add(ColorEvent.toEmber);
                     },
-                    color: Colors.amber,
-                    shape: (color == Colors.amber)
-                        ? CircleBorder(
-                            side: BorderSide(color: Colors.black, width: 3),
-                          )
-                        : CircleBorder(),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.amber,
+                      shape: (color == Colors.amber)
+                          ? CircleBorder(
+                              side: BorderSide(color: Colors.black, width: 3),
+                            )
+                          : CircleBorder(),
+                    ),
+                    child: Text(''),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: () {
                       colorBloc.add(ColorEvent.toPurple);
                     },
-                    color: Colors.purple,
-                    shape: (color == Colors.purple)
-                        ? CircleBorder(
-                            side: BorderSide(color: Colors.black, width: 3),
-                          )
-                        : CircleBorder(),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.purple,
+                      shape: (color == Colors.purple)
+                          ? CircleBorder(
+                              side: BorderSide(color: Colors.black, width: 3),
+                            )
+                          : CircleBorder(),
+                    ),
+                    child: Text(''),
                   ),
                 ],
               )

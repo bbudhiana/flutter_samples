@@ -79,7 +79,22 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
               ),
             ),
           ),
-          RaisedButton.icon(
+          ElevatedButton.icon(
+            onPressed: _savePlace,
+            icon: Icon(Icons.add),
+            label: Text('Add Place'),
+            style: ButtonStyle(
+              elevation: MaterialStateProperty.all(0),
+              foregroundColor: MaterialStateProperty.all(Colors.black),
+              backgroundColor: MaterialStateProperty.resolveWith(
+                (states) =>
+                    states.any((element) => element == MaterialState.pressed)
+                        ? Colors.red
+                        : Colors.yellow[400],
+              ),
+            ),
+          ),
+          /* RaisedButton.icon(
             icon: Icon(Icons.add),
             label: Text('Add Place'),
             onPressed: _savePlace,
@@ -87,7 +102,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             //materialTapTargetSize = membuat button penuh, shrinkWrap menambah area tap
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             color: Colors.yellow[400],
-          )
+          ) */
         ],
       ),
     );

@@ -12,8 +12,10 @@ class LocationHelper {
 
   //https://developers.google.com/maps/documentation/geocoding/overview?authuser=1#reverse-restricted
   static Future<String> getPlaceAddress(double lat, double lng) async {
-    final url =
-        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&location_type=ROOFTOP&result_type=street_address&key=$GOOGLE_API_KEY';
+    //final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&location_type=ROOFTOP&result_type=street_address&key=$GOOGLE_API_KEY';
+
+    final url = Uri.parse(
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&location_type=ROOFTOP&result_type=street_address&key=$GOOGLE_API_KEY');
 
     final response = await http.get(url);
 

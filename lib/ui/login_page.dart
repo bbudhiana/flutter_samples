@@ -47,27 +47,27 @@ class _LoginPageState extends State<LoginPage> {
               controller: passwordController,
             ),
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text('Sign up'),
             onPressed: () async {
               await AuthServices.signUp(
                   emailController.text, passwordController.text);
             },
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text('Sign in'),
             onPressed: () async {
               await AuthServices.signIn(
                   emailController.text, passwordController.text);
             },
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text('Sign in anonymous'),
             onPressed: () async {
               await AuthServices.signInAnonymous();
             },
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text('Sign in with Google'),
             onPressed: () async {
               await AuthServices.signInWithGoogle();
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
           /* if (_isLoading)
             CircularProgressIndicator()
           else
-            RaisedButton(
+            ElevatedButton(
               child: Text('Sign in with Google'),
               onPressed: _submitGoogle,
             ), */

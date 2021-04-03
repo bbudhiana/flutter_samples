@@ -26,9 +26,11 @@ class _GetScreenState extends State<GetScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Text(user != null ? user.id + " | " + user.name : 'No Data'),
-            RaisedButton(
-              textColor: Colors.white,
-              padding: const EdgeInsets.all(0.0),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                padding: const EdgeInsets.all(0.0),
+              ),
               onPressed: () {
                 //FIRST : Connect to API with http to get data
                 User.connectToAPI("12").then((value) {

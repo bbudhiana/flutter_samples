@@ -49,7 +49,7 @@ class _FirebaseStorageScreenState extends State<FirebaseStorageScreen> {
               SizedBox(
                 height: 10,
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async {
                   final File file = await getImage();
                   imagePath = await DatabaseServices.uploadImage(file);

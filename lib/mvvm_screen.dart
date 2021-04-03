@@ -34,8 +34,10 @@ class MvvmScreen extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            RaisedButton(
-              color: Colors.blueGrey,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blueGrey,
+              ),
               onPressed: () {
                 bloc.add(random.nextInt(10) + 1);
               },

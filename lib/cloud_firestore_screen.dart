@@ -16,7 +16,7 @@ class CloudFirestoreScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
+              ElevatedButton(
                 child: Text('Add Data'),
                 onPressed: () {
                   //call service on database services
@@ -24,7 +24,7 @@ class CloudFirestoreScreen extends StatelessWidget {
                       name: "Masker", price: 100000);
                 },
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('Edit Data'),
                 onPressed: () {
                   //call service on database services
@@ -32,7 +32,7 @@ class CloudFirestoreScreen extends StatelessWidget {
                       name: "Masker", price: 200000);
                 },
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('Get Data'),
                 onPressed: () async {
                   //call service on database services
@@ -42,7 +42,7 @@ class CloudFirestoreScreen extends StatelessWidget {
                   print(snapshot.data()['harga']);
                 },
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('Delete Data'),
                 onPressed: () async {
                   //call service on database services

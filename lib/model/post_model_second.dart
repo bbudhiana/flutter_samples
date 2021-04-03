@@ -40,10 +40,16 @@ class PostsModel {
 
   Future<List<PostModel>> _getServerData(int start, int limit) async {
     //URL API
-    String apiURL = "https://jsonplaceholder.typicode.com/posts?_start=" +
+    /* String apiURL = "https://jsonplaceholder.typicode.com/posts?_start=" +
         start.toString() +
         "&_limit=" +
-        limit.toString();
+        limit.toString(); */
+
+    var apiURL = Uri.parse(
+        "https://jsonplaceholder.typicode.com/posts?_start=" +
+            start.toString() +
+            "&_limit=" +
+            limit.toString());
 
     //json
     var apiResult = await http.get(apiURL);

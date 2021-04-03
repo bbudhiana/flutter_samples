@@ -30,7 +30,7 @@ class _CameraGuideScreenState extends State<CameraGuideScreen> {
               color: Colors.grey[200],
               child: (imageFile != null) ? Image.file(imageFile) : SizedBox(),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("Take Picture"),
               onPressed: () async {
                 imageFile = await Navigator.push<File>(

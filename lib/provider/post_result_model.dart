@@ -30,7 +30,8 @@ class PostResultModel {
   //Future is static because its own by the class
   static Future<PostResultModel> connectToAPI(String name, String job) async {
     //method 'POS' url need map name dan job
-    String apiURL = "https://reqres.in/api/users";
+    //String apiURL = "https://reqres.in/api/users";
+    var apiURL = Uri.parse("https://reqres.in/api/users");
 
     //send parameter2 need by apiURL {"name":name, "job":job}
     //apiResult = {"name":"Bana","job":"Insinyur","id":"100","createdAt":"2020-07-12T15:09:30.531Z"}

@@ -143,15 +143,17 @@ class _CameraPageState extends State<CameraPage> {
                             width: 70,
                             height: 70,
                             margin: EdgeInsets.only(top: 50),
-                            child: RaisedButton(
+                            child: ElevatedButton(
                               onPressed: () async {
                                 if (!_controller.value.isTakingPicture) {
                                   File result = await takePicture();
                                   Navigator.pop(context, result);
                                 }
                               },
-                              shape: CircleBorder(),
-                              color: Colors.blue,
+                              style: ElevatedButton.styleFrom(
+                                shape: CircleBorder(),
+                                primary: Colors.blue,
+                              ),
                             ),
                           ),
                         ],

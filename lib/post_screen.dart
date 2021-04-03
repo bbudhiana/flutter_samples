@@ -34,9 +34,11 @@ class _PostScreenState extends State<PostScreen> {
                       ' | ' +
                       postResult.created
                   : 'No Data'),
-              RaisedButton(
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(0.0),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  padding: const EdgeInsets.all(0.0),
+                ),
                 onPressed: () {
                   //First : get the data
                   PostResultModel.connectToAPI("Bana", "Insinyur")

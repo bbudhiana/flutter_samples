@@ -17,7 +17,8 @@ class User {
 
   //karena merupakan method async maka dapat dipastikan return nya adalah sebuah Future
   static Future<User> connectToAPI(String id) async {
-    String apiURL = "https://reqres.in/api/users/" + id;
+    //String apiURL = "https://reqres.in/api/users/" + id;
+    var apiURL = Uri.parse("https://reqres.in/api/users/" + id);
 
     //http.get only need url address as data source, apiResult is json type
     //apiResult.body = {"data":{"id":12,"email":"rachel.howell@reqres.in","first_name"...
@@ -37,7 +38,8 @@ class User {
 
   //the return must a Future (Future<List(User)>), a Future List of User
   static Future<List<User>> getUsers(String page) async {
-    String apiURL = "https://reqres.in/api/users?page=" + page;
+    //String apiURL = "https://reqres.in/api/users?page=" + page;
+    var apiURL = Uri.parse("https://reqres.in/api/users?page=" + page);
 
     var apiResult = await http.get(apiURL);
     //print(apiResult.body);

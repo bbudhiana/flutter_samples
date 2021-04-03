@@ -24,7 +24,7 @@ class MultiblocScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => SecondPage()));
@@ -33,8 +33,10 @@ class MultiblocScreen extends StatelessWidget {
                   'Click to change',
                   style: TextStyle(color: Colors.white),
                 ),
-                color: color,
-                shape: StadiumBorder(),
+                style: ElevatedButton.styleFrom(
+                  primary: color,
+                  shape: StadiumBorder(),
+                ),
               )
             ],
           ),

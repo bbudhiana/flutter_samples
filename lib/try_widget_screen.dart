@@ -81,20 +81,20 @@ class _TryWidgetScreenState extends State<TryWidgetScreen> {
           ),
 
           //CALL LAUNCHER
-          RaisedButton(
+          ElevatedButton(
             onPressed: () async => await call('08121875050'),
             child: Text('Launch Call Phone'),
           ),
 
           //URL LAUNCHER
-          RaisedButton(
+          ElevatedButton(
             //onPressed: _launchURL,
             onPressed: () async => await openUrl("https://flutter.dev"),
             child: Text('Launch URL'),
           ),
 
           //URL LAUNCHER
-          RaisedButton(
+          ElevatedButton(
             //onPressed: _launchURL,
             onPressed: () async => await openUrl("https://flutter.dev",
                 forceWebView: true, enableJavascript: true),

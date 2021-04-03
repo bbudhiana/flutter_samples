@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+/* import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -238,3 +238,4 @@ class _MapHereScreenState extends State<MapHereScreen> {
         .lookAtPointWithDistance(initialLocation, distanceToEarthInMeters);
   }
 }
+ */

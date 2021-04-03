@@ -50,7 +50,7 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                       ),
                     ),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: () {
                       //context.bloc<CounterBloc5>().add(CounterBlocIncrement(1));
                       context.read<CounterBloc5>().add(CounterBlocIncrement(1));
@@ -90,7 +90,7 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                       ),
                     ),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: () {
                       //context.bloc<CountercubitCubit>().cubitIncrement(1);
                       context.read<CountercubitCubit>().cubitIncrement(1);

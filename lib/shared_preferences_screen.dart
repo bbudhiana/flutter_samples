@@ -70,13 +70,13 @@ class _SharedPreferencesScreenState extends State<SharedPreferencesScreen> {
                 });
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("save"),
               onPressed: () {
                 saveData();
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("load"),
               onPressed: () {
                 getName().then((value) {

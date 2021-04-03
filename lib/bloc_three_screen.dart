@@ -75,15 +75,17 @@ class BlocThreeScreen extends StatelessWidget {
             SizedBox(
               width: 40,
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 'Increment',
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
-              shape: StadiumBorder(),
-              color: Colors.green[800],
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green[800],
+                shape: StadiumBorder(),
+              ),
               onPressed: () {
                 //hanya baca apakah ada perubahan, tapi tidak pantau perubahan
                 context.read<CounterthreeBloc>().add(Increment());

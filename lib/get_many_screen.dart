@@ -49,9 +49,11 @@ class _GetManyScreenState extends State<GetManyScreen> {
                 : Container(
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: buildListView(userData)),
-            RaisedButton(
-              textColor: Colors.white,
-              padding: const EdgeInsets.all(0.0),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                padding: const EdgeInsets.all(0.0),
+              ),
               onPressed: () {
                 User.getUsers("2").then((users) {
                   /*  output = "";

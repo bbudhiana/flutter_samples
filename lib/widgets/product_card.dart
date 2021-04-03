@@ -173,19 +173,21 @@ class ProductCard extends StatelessWidget {
                   SizedBox(
                     //default akan ditengah, total 150 dikasih 140, maka sisa 10 dibagi 2, yaitu kiri 5 kanan 5
                     width: 140,
-                    child: RaisedButton(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: firstColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(16),
+                            bottomRight: Radius.circular(16),
+                          ),
+                        ),
+                      ),
                       onPressed: onAddCartTap,
-                      color: firstColor,
                       child: Icon(
                         Icons.add_shopping_cart,
                         size: 18,
                         color: Colors.white,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(16),
-                          bottomRight: Radius.circular(16),
-                        ),
                       ),
                     ),
                   )

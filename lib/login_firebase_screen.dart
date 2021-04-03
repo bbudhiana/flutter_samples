@@ -12,6 +12,7 @@ class LoginFirebaseScreen extends StatelessWidget {
     return StreamProvider.value(
       //nilai yang dipantau terus menerus, setiap perubahan berefek di widget dibawahnya StreamProvider
       //value: AuthServices.firebaseUserStream,
+      initialData: null,
       value: AuthServices.firebaseUserAllStream,
       child: Scaffold(
         appBar: AppBar(

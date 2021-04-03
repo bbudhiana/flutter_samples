@@ -30,8 +30,10 @@ class ProgressBarProvider extends StatelessWidget {
                   height: 10,
                 ),
                 Consumer<TimeState>(
-                  builder: (context, timeState, _) => RaisedButton(
-                    color: Colors.lightBlue,
+                  builder: (context, timeState, _) => ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.lightBlue,
+                    ),
                     onPressed: () {
                       Timer.periodic(Duration(seconds: 1), (timer) {
                         if (timeState.time == 0)
@@ -92,7 +94,9 @@ class CustomProgressBar extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: (ratio < 0.3)
                         ? Colors.red
-                        : (ratio < 0.6) ? Colors.amber[300] : Colors.lightGreen,
+                        : (ratio < 0.6)
+                            ? Colors.amber[300]
+                            : Colors.lightGreen,
                     borderRadius: BorderRadius.circular(5)),
               ),
             )

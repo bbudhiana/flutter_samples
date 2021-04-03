@@ -44,7 +44,8 @@ class User {
 
 //karena merupakan method async maka dapat dipastikan return nya adalah sebuah Future
   static Future<User> getUserFromAPI(int id) async {
-    String apiURL = "https://reqres.in/api/users/" + id.toString();
+    //String apiURL = "https://reqres.in/api/users/" + id.toString();
+    var apiURL = Uri.parse("https://reqres.in/api/users/" + id.toString());
 
     //apiResult adalah instance dari Response (Future<Response>)
     var apiResult = await http.get(apiURL);

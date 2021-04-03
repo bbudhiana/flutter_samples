@@ -73,9 +73,10 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:http/http.dart' as http;
 
 //HERE MAP PAKET
-import 'package:here_sdk/core.dart';
+//import 'package:here_sdk/core.dart';
 
 //import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:path_provider/path_provider.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -84,12 +85,15 @@ import 'stream_provider_screen.dart';
 
 void main() async {
   //untuk aktifkan sdk HERE MAP (here.com)
-  SdkContext.init(IsolateOrigin.main);
+  //SdkContext.init(IsolateOrigin.main);
 
   //THIS CODE FOR : Setup HydratedStorage
   //WE MUST ENSURE getApplicationDocumentsDirectory BEFORE runApp, THEN USED ensureInitialized()
   WidgetsFlutterBinding.ensureInitialized();
-  HydratedBloc.storage = await HydratedStorage.build();
+  //HydratedBloc.storage = await HydratedStorage.build();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getTemporaryDirectory(),
+  );
 
   //for HIVE
   //WidgetsFlutterBinding.ensureInitialized();
@@ -241,7 +245,7 @@ class MyApp extends StatelessWidget {
             AddPlaceScreen.routename: (ctx) => AddPlaceScreen(),
             PlaceDetailScreen.routeName: (ctx) => PlaceDetailScreen(),
             CameraGuideScreen.routeName: (ctx) => CameraGuideScreen(),
-            MapHereScreen.routeName: (ctx) => MapHereScreen(),
+            //MapHereScreen.routeName: (ctx) => MapHereScreen(),
             LocationRealScreen.routeName: (ctx) => LocationRealScreen(),
             SlidableScreen.routeName: (ctx) => SlidableScreen(),
           },
@@ -569,13 +573,13 @@ class MyHomePage extends StatelessWidget {
             iconSubject: Icons.camera,
             route: CameraGuideScreen.routeName,
           ),
-          ListSubject(
+          /* ListSubject(
             number: _i++,
             title: 'Map - Menggunakan Here Map',
             subTitle: 'Map dengan menggunakan 3rd Party Here.com',
             iconSubject: Icons.map_sharp,
             route: MapHereScreen.routeName,
-          ),
+          ), */
           ListSubject(
             number: _i++,
             title: 'Location - Real Update location of User',

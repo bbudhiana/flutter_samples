@@ -38,8 +38,10 @@ class ListviewBlocScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          RaisedButton(
-            color: Color(0xffF44336),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Color(0xffF44336),
+            ),
             child: Text(
               "create products",
               style: TextStyle(color: Colors.white),

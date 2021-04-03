@@ -82,8 +82,8 @@ class PostBlocVersion2 extends Bloc<PostEvent, PostState> {
       state is PostSuccess && state.hasReachedMax;
 
   Future<List<Post>> _fetchPosts(int startIndex, int limit) async {
-    final response = await httpClient.get(
-        'https://jsonplaceholder.typicode.com/posts?_start=$startIndex&_limit=$limit');
+    final response = await httpClient.get(Uri.parse(
+        'https://jsonplaceholder.typicode.com/posts?_start=$startIndex&_limit=$limit'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body) as List;
       return data.map((rawPost) {

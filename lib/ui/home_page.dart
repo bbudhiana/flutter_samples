@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     return Center(
       child: Column(children: [
         Text(user.uid),
-        RaisedButton(
+        ElevatedButton(
           onPressed: () async {
             await AuthServices.signOut();
           },

@@ -33,7 +33,7 @@ class _TimerScreenState extends State<TimerScreen> {
               SizedBox(
                 height: 10,
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('start timer!'),
                 onPressed: () {
                   //inisialisasi
@@ -52,7 +52,7 @@ class _TimerScreenState extends State<TimerScreen> {
               SizedBox(
                 height: 10,
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('stop timer!'),
                 onPressed: () {
                   isStop = true;
@@ -61,7 +61,7 @@ class _TimerScreenState extends State<TimerScreen> {
               SizedBox(
                 height: 10,
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('ubah warna langsung!'),
                 onPressed: () {
                   Timer.run(() {
@@ -74,7 +74,7 @@ class _TimerScreenState extends State<TimerScreen> {
               SizedBox(
                 height: 10,
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('ubah warna 5 detik kemudian!'),
                 onPressed: () {
                   Timer(Duration(seconds: 5), () {
