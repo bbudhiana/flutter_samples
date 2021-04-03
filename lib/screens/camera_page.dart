@@ -154,6 +154,7 @@ class _CameraPageState extends State<CameraPage> {
                                 shape: CircleBorder(),
                                 primary: Colors.blue,
                               ),
+                              child: null,
                             ),
                           ),
                         ],
