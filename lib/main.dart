@@ -1,9 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_samples/bindings/infinite_bind.dart';
 import 'package:flutter_samples/bloc/counterthree_bloc.dart';
 //import 'package:flutter_samples/bloc/infiniteversion2/post_bloc_version2.dart';
 import 'package:flutter_samples/camera_guide_screen.dart';
+import 'package:flutter_samples/controllers/infinite_controller.dart';
+import 'package:flutter_samples/infinite_loading_getx_screen.dart';
 import 'package:flutter_samples/infinite_stream_builder_screen.dart';
 import 'package:flutter_samples/location_real_screen.dart';
 import 'package:flutter_samples/map_here_screen.dart';
@@ -68,6 +71,7 @@ import 'infinite_future_builder_screen.dart';
 import 'infinite_loading_cubit_select_screen.dart';
 import 'infinite_loading_screen2.dart';
 import 'listview_bloc_screen.dart';
+import 'package:get/get.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -82,6 +86,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'provider/great_places.dart';
 import 'stream_provider_screen.dart';
+
+import 'package:get/get_navigation/src/routes/transitions_type.dart'
+    as transition_type;
 
 void main() async {
   //untuk aktifkan sdk HERE MAP (here.com)
@@ -163,7 +170,8 @@ class MyApp extends StatelessWidget {
             create: (context) => CounterthreeBloc(),
           )
         ],
-        child: MaterialApp(
+        //child: MaterialApp(
+        child: GetMaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
             primarySwatch: Colors.blue,
@@ -175,7 +183,16 @@ class MyApp extends StatelessWidget {
             ), */
           ),
           debugShowCheckedModeBanner: false,
+          defaultTransition: transition_type.Transition.native,
           home: MyHomePage(title: 'HTTP and Widget Sample'),
+          getPages: [
+            GetPage(
+              name: '/infinite-loading-getx',
+              page: () => InfiniteLoadingGetxScreen(),
+              binding: InfiniteBind(),
+              transition: transition_type.Transition.cupertino,
+            ),
+          ],
           routes: {
             PostScreen.routeName: (ctx) => PostScreen(),
             GetScreen.routeName: (ctx) => GetScreen(),
@@ -217,6 +234,7 @@ class MyApp extends StatelessWidget {
             InfiniteLoadingCubitSelectScreen.routeName: (ctx) => BlocProvider(
                 create: (context) => MypostCubit(),
                 child: InfiniteLoadingCubitSelectScreen()),
+            //InfiniteLoadingGetxScreen.routeName: (ctx) => InfiniteLoadingGetxScreen(),
             MobxStateScreen.routeName: (ctx) => MobxStateScreen(),
             DivisionScreen.routeName: (ctx) => DivisionScreen(),
             SliderPageviewScreen.routeName: (ctx) => SliderPageviewScreen(),
@@ -423,6 +441,14 @@ class MyHomePage extends StatelessWidget {
             subTitle: 'List infinite menggunakan BLoC Cubit',
             iconSubject: Icons.info_outline,
             route: InfiniteLoadingCubitScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Infinite Loading with GetX',
+            subTitle: 'List infinite menggunakan GetX',
+            iconSubject: Icons.get_app,
+            //route: InfiniteLoadingGetxScreen.routeName,
+            route: '/infinite-loading-getx',
           ),
           ListSubject(
             number: _i++,
