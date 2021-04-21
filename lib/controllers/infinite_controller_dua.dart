@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_samples/model/post.dart';
-import 'package:flutter_samples/provider/post_getx_provider.dart';
+import 'package:flutter_samples/model/post_dua.dart';
+import 'package:flutter_samples/services/infinite_db_service.dart';
 import 'package:get/get.dart';
 
 //GETX - Reactive or STREAM
-class InfiniteController extends GetxController {
+class InfiniteControllerDua extends GetxController {
   var posts = [].obs;
   var hasReachedMax = false.obs;
+  Services services = Services();
+  var postloading = true.obs;
 
   //ScrollController controller = ScrollController();
   //agar ScrollController dapat ter-dispose secara otomatis dalam environtment GetX, maka gunakan Get.put
@@ -34,31 +36,39 @@ class InfiniteController extends GetxController {
   }
 
   void myPost() async {
-    List<Post> _posts;
-    //PostGetxProvider _postGetxProvider;
+    try {
+      List<Postdua> _posts;
+      //PostGetxProvider _postGetxProvider;
 
-    if (posts.value == null) {
-      _posts = await Post.connectToApi(0, 10);
-      //_posts = await _myPostClass.connectToApiTwo(0, 10);
+      if (posts.value == null) {
+        //pasang kondisi postloading 'true' artinya sedang proses ambil data
+        postloading.value = true;
 
-      //jika belum ada datanya (null maka) state hasReachedMax=true dan posts=null;
-      //selainnya maka ambil dan kembalikan dengan state isi data dan hasReachedMax=false;
-      if (_posts == null) {
-        hasReachedMax.value = true;
-        posts.value = null;
+        //ambil datanya saat pertama kali
+        _posts = await services.getallposts(0, 10);
+
+        if (_posts == null) {
+          hasReachedMax.value = true;
+          //posts.assignAll(null);
+          posts.value = null;
+        } else {
+          //posts.assignAll(_posts);
+          posts.value = _posts;
+          hasReachedMax.value = false;
+        }
       } else {
-        posts.value = _posts;
-        hasReachedMax.value = false;
-      }
-    } else {
-      //ambil post berikutnya dengan parameter start berasal dari jumlah post sebelumnya
-      _posts = await Post.connectToApi(posts.value.length, 10);
-      //_posts = await _myPostClass.connectToApiTwo(posts.length, 10);
+        //ambil post berikutnya dengan parameter start berasal dari jumlah post sebelumnya
+        _posts = await services.getallposts(posts.value.length, 10);
+        //_posts = await _myPostClass.connectToApiTwo(posts.length, 10);
 
-      hasReachedMax.value = (_posts.isEmpty) ? true : false;
-      posts.value = (_posts.isEmpty) ? posts.value : posts.value + _posts;
+        hasReachedMax.value = (_posts.isEmpty) ? true : false;
+        //posts.assignAll((_posts.isEmpty) ? posts.value : posts.value + _posts);
+        posts.value = (_posts.isEmpty) ? posts.value : posts.value + _posts;
+      }
+    } finally {
+      //proses apapun di atas dianggap selesai
+      postloading.value = false;
     }
-    //update(['aVeryUniqueID']);
   }
 
   @override

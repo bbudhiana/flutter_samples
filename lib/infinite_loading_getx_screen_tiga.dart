@@ -1,88 +1,81 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_samples/controllers/infinite_controller.dart';
-import 'package:flutter_samples/services/sample_api_service.dart';
+import 'package:flutter_samples/controllers/infinite_controller_dua.dart';
+import 'package:flutter_samples/ui/post_item_dua.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import './ui/post_item.dart';
+
+//COPIAN DARI inifinite_loading_getx_screen_dua
+//bedanya ini menggunakan obx
+//source : https://medium.com/flutter-community/the-flutter-getx-ecosystem-state-management-881c7235511d
 
 //main source : https://pub.dev/packages/get/example
 //source : https://github.com/jonataslaw/getx/blob/master/documentation/en_US/route_management.md#navigation-with-named-routes
-
-//GETX = STREAM , STREAM is POWERFULL BUT USE MORE MEMORY
-class InfiniteLoadingGetxScreen extends GetView<InfiniteController> {
+//
+//Menggunakan Pendekatan Terstruktur
+//Model : untuk konstruksi datanya
+//Service : untuk koneksi dan ambil datanya (datasource dan model nya)
+//Controller : untuk mengatur interaksi data (service) dan view (screen)
+//GetView : a const Stateless Widget that has a getter controller for a registered Controller, that's all.
+//dengan demikian 'controller' di dapat dari GetView<InfiniteControllerDua>
+//Source : https://pub.dev/packages/get - bagian GetView
+//class InfiniteLoadingGetxScreenDua extends GetView<InfiniteControllerDua> {
+class InfiniteLoadingGetxScreenTiga extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //contoh depedency injection, misalnya ini di home
-    final sampeApiService = Get.put(SampleApiService());
-
-    //jika sudah pernah di inject misal di home, maka bisa dipanggil lagi
-    //final sampleApiService = Get.find<SampleApiService>();
-
-    //instance dari storage
-    //use GetStorage through an instance or use directly GetStorage().read('key')
-    GetStorage box = GetStorage();
-    box.write('myKey', 'this is test value');
-    print(box.read('myKey'));
-
+    //sudah dipanggil di bind di home maka tinggal ambil saja InifiniteControllerDua nya
+    final controller = Get.find<InfiniteControllerDua>();
     controller.onFirstTime();
 
     return Scaffold(
       //key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("Infinite Loading with GetX"),
+        title: FittedBox(child: Text("Infinite Loading with GetX - Obx")),
       ),
-      body: GetX<InfiniteController>(
-        init: InfiniteController(),
-        // value is an instance of Controller.
-        builder: (value) {
-          //contoh akses dari depedency injection
-          print(sampeApiService.fetchStringData());
-
-          if (value.hasReachedMax.value) {
-            WidgetsBinding.instance.addPostFrameCallback((_) => Get.snackbar(
-                  "Hi",
-                  "Record has reached maximum...",
-                  duration: Duration(seconds: 3),
-                  snackPosition: SnackPosition.BOTTOM,
-                ));
-          }
-          //controller adalah variable milik GetX, bisa digunakan untuk ambil data
-          return Container(
-            margin: EdgeInsets.only(left: 20, right: 20),
-            child: (controller.posts.value == null)
-                ? Center(
-                    child: SizedBox(
-                      width: 130,
-                      height: 130,
-                      child: FlareActor(
-                        "assets/loading_success_error.flr",
-                        animation: "loading",
-                      ),
+      body: Obx(() {
+        if (controller.hasReachedMax.value) {
+          WidgetsBinding.instance.addPostFrameCallback((_) => Get.snackbar(
+                "Hi",
+                "Record has reached maximum...",
+                duration: Duration(seconds: 3),
+                snackPosition: SnackPosition.BOTTOM,
+              ));
+        }
+        //controller adalah variable milik GetX, bisa digunakan untuk ambil data
+        return Container(
+          margin: EdgeInsets.only(left: 20, right: 20),
+          //child: (controller.posts.value == null)
+          child: (controller.postloading.value)
+              ? Center(
+                  child: SizedBox(
+                    width: 130,
+                    height: 130,
+                    child: FlareActor(
+                      "assets/loading_success_error.flr",
+                      animation: "loading",
                     ),
-                  )
-                : ListView.builder(
-                    //controller men-trigger cubit bloc
-                    controller: value.controller,
-                    itemCount: (value.hasReachedMax.value)
-                        ? value.posts.value.length
-                        : value.posts.value.length + 1,
-                    itemBuilder: (context, index) =>
-                        (index < value.posts.value.length)
-                            ? PostItem(value.posts.value[index])
-                            : Container(
-                                child: Center(
-                                  child: SizedBox(
-                                    width: 30,
-                                    height: 30,
-                                    child: CircularProgressIndicator(),
-                                  ),
+                  ),
+                )
+              : ListView.builder(
+                  //controller men-trigger cubit bloc
+                  controller: controller.controller,
+                  itemCount: (controller.hasReachedMax.value)
+                      ? controller.posts.value.length
+                      : controller.posts.value.length + 1,
+                  itemBuilder: (context, index) =>
+                      (index < controller.posts.value.length)
+                          ? PostItemDua(controller.posts.value[index])
+                          : Container(
+                              child: Center(
+                                child: SizedBox(
+                                  width: 30,
+                                  height: 30,
+                                  child: CircularProgressIndicator(),
                                 ),
                               ),
-                  ),
-          );
-        },
-      ),
+                            ),
+                ),
+        );
+      }),
     );
   }
 }
@@ -98,6 +91,8 @@ class InfiniteLoadingGetxScreen extends GetView<InfiniteController> {
       appBar: AppBar(
         title: Text("Infinite Loading with GetX"),
       ),
+
+      //You need to initialize Controller only the first time it's used in GetBuilder
       body: GetBuilder<InfiniteController>(
         id: 'aVeryUniqueID', // here
         init: InfiniteController(),

@@ -2,16 +2,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_samples/bindings/infinite_bind.dart';
+import 'package:flutter_samples/bindings/infinite_bind_dua.dart';
 import 'package:flutter_samples/bloc/counterthree_bloc.dart';
 //import 'package:flutter_samples/bloc/infiniteversion2/post_bloc_version2.dart';
 import 'package:flutter_samples/camera_guide_screen.dart';
 import 'package:flutter_samples/controllers/infinite_controller.dart';
 import 'package:flutter_samples/infinite_loading_getx_screen.dart';
+import 'package:flutter_samples/infinite_loading_getx_screen_dua.dart';
+import 'package:flutter_samples/infinite_loading_getx_screen_tiga.dart';
 import 'package:flutter_samples/infinite_stream_builder_screen.dart';
 import 'package:flutter_samples/location_real_screen.dart';
 import 'package:flutter_samples/map_here_screen.dart';
 import 'package:flutter_samples/screens/place_detail_screen.dart';
 import 'package:flutter_samples/slidable_screen.dart';
+import 'package:get_storage/get_storage.dart';
 import './application_lifecycle_state_screen.dart';
 import './biometric_screen.dart';
 import './bloc/counter_bloc.dart';
@@ -121,6 +125,9 @@ void main() async {
   OneSignal.shared
       .setInFocusDisplayType(OSNotificationDisplayType.notification);
 
+  //INISIALISASI PENGGUNAAN Get Strorage
+  await GetStorage.init();
+
   runApp(MyApp());
 }
 
@@ -190,6 +197,18 @@ class MyApp extends StatelessWidget {
               name: '/infinite-loading-getx',
               page: () => InfiniteLoadingGetxScreen(),
               binding: InfiniteBind(),
+              transition: transition_type.Transition.cupertino,
+            ),
+            GetPage(
+              name: '/infinite-loading-getx-dua',
+              page: () => InfiniteLoadingGetxScreenDua(),
+              binding: InfiniteBindDua(),
+              transition: transition_type.Transition.cupertino,
+            ),
+            GetPage(
+              name: '/infinite-loading-getx-tiga',
+              page: () => InfiniteLoadingGetxScreenTiga(),
+              binding: InfiniteBindDua(),
               transition: transition_type.Transition.cupertino,
             ),
           ],
@@ -449,6 +468,24 @@ class MyHomePage extends StatelessWidget {
             iconSubject: Icons.get_app,
             //route: InfiniteLoadingGetxScreen.routeName,
             route: '/infinite-loading-getx',
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Infinite Loading with GetX versi 2',
+            subTitle:
+                'List infinite menggunakan GetX, dengan struktur file yang baik',
+            iconSubject: Icons.get_app,
+            //route: InfiniteLoadingGetxScreen.routeName,
+            route: '/infinite-loading-getx-dua',
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Infinite Loading with GetX versi 3',
+            subTitle:
+                'List infinite menggunakan Obx, dengan struktur file yang baik',
+            iconSubject: Icons.get_app,
+            //route: InfiniteLoadingGetxScreen.routeName,
+            route: '/infinite-loading-getx-tiga',
           ),
           ListSubject(
             number: _i++,
