@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_samples/bindings/auth_bind.dart';
 import 'package:flutter_samples/bindings/infinite_bind.dart';
 import 'package:flutter_samples/bindings/infinite_bind_dua.dart';
+import 'package:flutter_samples/bloc/authentication_bloc.dart';
 import 'package:flutter_samples/bloc/counterthree_bloc.dart';
 //import 'package:flutter_samples/bloc/infiniteversion2/post_bloc_version2.dart';
 import 'package:flutter_samples/camera_guide_screen.dart';
@@ -12,8 +14,11 @@ import 'package:flutter_samples/infinite_loading_getx_screen_dua.dart';
 import 'package:flutter_samples/infinite_loading_getx_screen_tiga.dart';
 import 'package:flutter_samples/infinite_stream_builder_screen.dart';
 import 'package:flutter_samples/location_real_screen.dart';
+import 'package:flutter_samples/login_standard_getx.dart';
+import 'package:flutter_samples/login_standard_screen.dart';
 import 'package:flutter_samples/map_here_screen.dart';
 import 'package:flutter_samples/screens/place_detail_screen.dart';
+import 'package:flutter_samples/services/authentication_service.dart';
 import 'package:flutter_samples/slidable_screen.dart';
 import 'package:get_storage/get_storage.dart';
 import './application_lifecycle_state_screen.dart';
@@ -175,7 +180,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<CounterthreeBloc>(
             create: (context) => CounterthreeBloc(),
-          )
+          ),
         ],
         //child: MaterialApp(
         child: GetMaterialApp(
@@ -209,6 +214,12 @@ class MyApp extends StatelessWidget {
               name: '/infinite-loading-getx-tiga',
               page: () => InfiniteLoadingGetxScreenTiga(),
               binding: InfiniteBindDua(),
+              transition: transition_type.Transition.cupertino,
+            ),
+            GetPage(
+              name: '/login-standard-getx',
+              page: () => LoginStandardGetxScreen(),
+              binding: AuthBind(),
               transition: transition_type.Transition.cupertino,
             ),
           ],
@@ -261,6 +272,22 @@ class MyApp extends StatelessWidget {
             RiveFlutterScreen.routeName: (ctx) => RiveFlutterScreen(),
             GoogleFontScreen.routeName: (ctx) => GoogleFontScreen(),
             LoginFirebaseScreen.routeName: (ctx) => LoginFirebaseScreen(),
+            // Injects the Authentication service
+            LoginStandardScreen.routeName: (ctx) =>
+                RepositoryProvider<AuthenticationService>(
+                  create: (context) {
+                    return FakeAuthenticationService();
+                  },
+                  // Injects the Authentication BLoC
+                  child: BlocProvider<AuthenticationBloc>(
+                    create: (context) {
+                      final authService =
+                          RepositoryProvider.of<AuthenticationService>(context);
+                      return AuthenticationBloc(authService)..add(AppLoaded());
+                    },
+                    child: LoginStandardScreen(),
+                  ),
+                ),
             CloudFirestoreScreen.routeName: (ctx) => CloudFirestoreScreen(),
             FirebaseStorageScreen.routeName: (ctx) => FirebaseStorageScreen(),
             ShimmerEffectScreen.routeName: (ctx) => ShimmerEffectScreen(),
@@ -543,6 +570,20 @@ class MyHomePage extends StatelessWidget {
                 'Login menggunakan firebase, baik anonymous atau email-pass',
             iconSubject: Icons.vpn_key,
             route: LoginFirebaseScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Login Standard - using email and pass',
+            subTitle: 'Login standard menggunakan email dan password',
+            iconSubject: Icons.vpn_key,
+            route: LoginStandardScreen.routeName,
+          ),
+          ListSubject(
+            number: _i++,
+            title: 'Login Standard - using email and pass - GetX',
+            subTitle: 'Login Standard dengan email-pass, dengan GetX',
+            iconSubject: Icons.get_app,
+            route: '/login-standard-getx',
           ),
           ListSubject(
             number: _i++,
