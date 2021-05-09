@@ -19,7 +19,7 @@ import './ui/post_item.dart';
 class InfiniteLoadingGetxScreenDua extends GetView<InfiniteControllerDua> {
   @override
   Widget build(BuildContext context) {
-    controller.onFirstTime();
+    //controller.onFirstTime();
 
     return Scaffold(
       //key: _scaffoldKey,

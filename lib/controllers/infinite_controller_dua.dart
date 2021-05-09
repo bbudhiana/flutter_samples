@@ -79,7 +79,8 @@ class InfiniteControllerDua extends GetxController {
 
   @override
   void onInit() {
-    print('init');
+    print('init dua');
+    onFirstTime();
     controller.addListener(onScroll);
     //myPost();
     super.onInit();

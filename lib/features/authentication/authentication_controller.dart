@@ -10,6 +10,8 @@ class AuthenticationController extends GetxController {
 
   final _authenticationStateStream = AuthenticationState().obs;
 
+  //untuk mendapatkan nilai state, maka definisikan get function
+  //jadi di UI tinggal controller.state
   AuthenticationState get state => _authenticationStateStream.value;
 
   // Called immediately after the contoller is allocated in memory.
