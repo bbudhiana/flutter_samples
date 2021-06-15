@@ -27,11 +27,13 @@ class InfiniteControllerDua extends GetxController {
   }
 
   void onFirstTime() {
-    if (posts.value != null) {
-      posts.clear();
-      posts.value = null;
-      //update(['aVeryUniqueID']);
-    }
+    //if (posts.value != null) {
+    //posts.clear();
+    //posts.refresh();
+    print(posts);
+    //posts.value = null;
+    //update(['aVeryUniqueID']);
+    //}
     myPost();
   }
 
@@ -65,6 +67,8 @@ class InfiniteControllerDua extends GetxController {
         //posts.assignAll((_posts.isEmpty) ? posts.value : posts.value + _posts);
         posts.value = (_posts.isEmpty) ? posts.value : posts.value + _posts;
       }
+    } catch (e) {
+      throw e; //lempar error nya ke screen agar bisa ditampilkan
     } finally {
       //proses apapun di atas dianggap selesai
       postloading.value = false;
@@ -80,9 +84,9 @@ class InfiniteControllerDua extends GetxController {
   @override
   void onInit() {
     print('init dua');
-    onFirstTime();
+    //onFirstTime();
     controller.addListener(onScroll);
-    //myPost();
+    myPost();
     super.onInit();
   }
 

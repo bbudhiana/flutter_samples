@@ -30,49 +30,92 @@ class InfiniteLoadingGetxScreenDua extends GetView<InfiniteControllerDua> {
         init: InfiniteControllerDua(),
         // value is an instance of Controller.
         builder: (value) {
-          if (value.hasReachedMax.value) {
-            WidgetsBinding.instance.addPostFrameCallback((_) => Get.snackbar(
-                  "Hi",
-                  "Record has reached maximum...",
-                  duration: Duration(seconds: 3),
-                  snackPosition: SnackPosition.BOTTOM,
-                ));
-          }
-          //controller adalah variable milik GetX, bisa digunakan untuk ambil data
-          return Container(
-            margin: EdgeInsets.only(left: 20, right: 20),
-            //child: (controller.posts.value == null)
-            child: (controller.postloading.value)
-                ? Center(
-                    child: SizedBox(
-                      width: 130,
-                      height: 130,
-                      child: FlareActor(
-                        "assets/loading_success_error.flr",
-                        animation: "loading",
+          try {
+            if (value.hasReachedMax.value) {
+              WidgetsBinding.instance.addPostFrameCallback((_) => Get.snackbar(
+                    "Hi",
+                    "Record has reached maximum...",
+                    duration: Duration(seconds: 3),
+                    snackPosition: SnackPosition.BOTTOM,
+                  ));
+            }
+            //controller adalah variable milik GetX, bisa digunakan untuk ambil data
+            return Container(
+              margin: EdgeInsets.only(left: 20, right: 20),
+              //child: (controller.posts.value == null)
+              child: (controller.postloading.value)
+                  ? Center(
+                      child: SizedBox(
+                        width: 130,
+                        height: 130,
+                        child: FlareActor(
+                          "assets/loading_success_error.flr",
+                          animation: "loading",
+                        ),
                       ),
-                    ),
-                  )
-                : ListView.builder(
-                    //controller men-trigger cubit bloc
-                    controller: value.controller,
-                    itemCount: (value.hasReachedMax.value)
-                        ? value.posts.value.length
-                        : value.posts.value.length + 1,
-                    itemBuilder: (context, index) =>
-                        (index < value.posts.value.length)
-                            ? PostItemDua(value.posts.value[index])
-                            : Container(
-                                child: Center(
-                                  child: SizedBox(
-                                    width: 30,
-                                    height: 30,
-                                    child: CircularProgressIndicator(),
+                    )
+                  : ListView.builder(
+                      //controller men-trigger cubit bloc
+                      controller: value.controller,
+                      itemCount: (value.hasReachedMax.value)
+                          ? value.posts.value.length
+                          : value.posts.value.length + 1,
+                      itemBuilder: (context, index) =>
+                          (index < value.posts.value.length)
+                              ? PostItemDua(value.posts.value[index])
+                              : Container(
+                                  child: Center(
+                                    child: SizedBox(
+                                      width: 30,
+                                      height: 30,
+                                      child: CircularProgressIndicator(),
+                                    ),
                                   ),
                                 ),
-                              ),
-                  ),
-          );
+                    ),
+            );
+          } catch (e) {
+            WidgetsBinding.instance.addPostFrameCallback(
+              (_) => Get.defaultDialog(
+                title: "Alert",
+                content: Text(
+                  "Something goes wrong...",
+                ),
+                /* actions: [
+                      ElevatedButton(onPressed: () {}, child: Text('Retry')),
+                      ElevatedButton(
+                          onPressed: () {
+                            //Get.back();
+                            Get.offAllNamed('/my-home-page');
+                            //Get.back();
+                          },
+                          child: Text('Back'))
+                    ], */
+                cancel: ElevatedButton(
+                    onPressed: () {
+                      Get.offAllNamed('/my-home-page');
+                    },
+                    child: Text('cancel')),
+                confirm: ElevatedButton(
+                    onPressed: () {
+                      Get.offAllNamed('/my-home-page');
+                    },
+                    child: Text('confirm')),
+                middleText: 'this is middle text',
+                middleTextStyle: TextStyle(color: Colors.red),
+                textCancel: 'gak ah',
+                titleStyle: TextStyle(color: Colors.red),
+                barrierDismissible: false,
+              ),
+            );
+            /* WidgetsBinding.instance.addPostFrameCallback((_) => Get.snackbar(
+                  "Failed",
+                  "Something goes wrong...",
+                  duration: Duration(seconds: 3),
+                  snackPosition: SnackPosition.BOTTOM,
+                )); */
+            return Container();
+          }
         },
       ),
     );
