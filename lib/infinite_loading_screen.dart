@@ -1,6 +1,7 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import './bloc/post_bloc.dart';
 import './ui/post_item.dart';
 
@@ -24,7 +25,7 @@ class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
 
     if (currentScroll == maxScroll) {
       //bloc.add(PostEvent());
-      context.read<PostBloc>()..add(PostEvent());
+      context.read<PostBloc>()..add(PostNextEvent());
     }
   }
 
@@ -91,19 +92,21 @@ class _InfiniteLoadingScreenState extends State<InfiniteLoadingScreen> {
                     ? postLoaded.posts.length
                     //tambah 1 untuk ruang buat CircularProgressIndicator()
                     : postLoaded.posts.length + 1,
-                itemBuilder: (context, index) =>
-                    //list ke length + 1 akan terisi CircularProgressIndicator(), sambil tunggu proses ambil data selesai
-                    (index < postLoaded.posts.length)
-                        ? PostItem(postLoaded.posts[index])
-                        : Container(
-                            child: Center(
-                              child: SizedBox(
-                                width: 30,
-                                height: 30,
-                                child: CircularProgressIndicator(),
-                              ),
+                itemBuilder: (context, index) {
+                  //if (index.isOdd) return const Divider();
+                  //list ke length + 1 akan terisi CircularProgressIndicator(), sambil tunggu proses ambil data selesai
+                  return (index < postLoaded.posts.length)
+                      ? PostItem(postLoaded.posts[index])
+                      : Container(
+                          child: Center(
+                            child: SizedBox(
+                              width: 30,
+                              height: 30,
+                              child: CircularProgressIndicator(),
                             ),
                           ),
+                        );
+                },
               );
             }
           },

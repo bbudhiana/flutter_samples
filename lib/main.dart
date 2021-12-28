@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_samples/bindings/auth_bind.dart';
@@ -9,20 +10,29 @@ import 'package:flutter_samples/bloc/authentication_bloc.dart';
 import 'package:flutter_samples/bloc/counterthree_bloc.dart';
 //import 'package:flutter_samples/bloc/infiniteversion2/post_bloc_version2.dart';
 import 'package:flutter_samples/camera_guide_screen.dart';
-import 'package:flutter_samples/controllers/infinite_controller.dart';
 import 'package:flutter_samples/infinite_loading_getx_screen.dart';
 import 'package:flutter_samples/infinite_loading_getx_screen_dua.dart';
 import 'package:flutter_samples/infinite_loading_getx_screen_dua_alternative.dart';
 import 'package:flutter_samples/infinite_loading_getx_screen_tiga.dart';
-import 'package:flutter_samples/infinite_stream_builder_screen.dart';
 import 'package:flutter_samples/location_real_screen.dart';
 import 'package:flutter_samples/login_standard_getx.dart';
 import 'package:flutter_samples/login_standard_screen.dart';
-import 'package:flutter_samples/map_here_screen.dart';
 import 'package:flutter_samples/screens/place_detail_screen.dart';
 import 'package:flutter_samples/services/authentication_service.dart';
 import 'package:flutter_samples/slidable_screen.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart'
+    as transition_type;
 import 'package:get_storage/get_storage.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+//import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+
 import './application_lifecycle_state_screen.dart';
 import './biometric_screen.dart';
 import './bloc/counter_bloc.dart';
@@ -54,8 +64,10 @@ import './model/monster.dart';
 import './multibloc_screen.dart';
 import './mvvm_screen.dart';
 import './one_signal_notification_screen.dart';
+import './post_screen.dart';
 import './progress_bar_provider.dart';
 import './provider/color_bloc_flutter.dart';
+import './provider/uiset.dart';
 import './replay_bloc_screen.dart';
 import './rive_flutter_screen.dart';
 import './screens/add_place_screen.dart';
@@ -67,11 +79,6 @@ import './state_management_screen.dart';
 import './switch_screen.dart';
 import './timer_screen.dart';
 import './try_widget_screen.dart';
-import './widgets/list_subject.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:provider/provider.dart';
-import './post_screen.dart';
-import './provider/uiset.dart';
 import 'bloc/color_bloc.dart';
 import 'bloc/counter_bloc_5.dart';
 import 'bloc/infiniteversion2/bloc.dart';
@@ -82,25 +89,9 @@ import 'infinite_future_builder_screen.dart';
 import 'infinite_loading_cubit_select_screen.dart';
 import 'infinite_loading_screen2.dart';
 import 'listview_bloc_screen.dart';
-import 'package:get/get.dart';
-
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:http/http.dart' as http;
-
-//HERE MAP PAKET
-//import 'package:here_sdk/core.dart';
-
-//import 'package:path_provider/path_provider.dart' as pathProvider;
-import 'package:path_provider/path_provider.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
 import 'my_home_page.dart';
 import 'provider/great_places.dart';
 import 'stream_provider_screen.dart';
-
-import 'package:get/get_navigation/src/routes/transitions_type.dart'
-    as transition_type;
 
 void main() async {
   //untuk aktifkan sdk HERE MAP (here.com)
@@ -110,8 +101,14 @@ void main() async {
   //WE MUST ENSURE getApplicationDocumentsDirectory BEFORE runApp, THEN USED ensureInitialized()
   WidgetsFlutterBinding.ensureInitialized();
   //HydratedBloc.storage = await HydratedStorage.build();
-  HydratedBloc.storage = await HydratedStorage.build(
+  /* HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getTemporaryDirectory(),
+  ); */
+
+  final storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb
+        ? HydratedStorage.webStorageDirectory
+        : await getTemporaryDirectory(),
   );
 
   //for HIVE
@@ -128,15 +125,26 @@ void main() async {
   await Firebase.initializeApp();
 
   //ONESIGNAL NOTIFICATION
+  //Remove this method to stop OneSignal Debugging
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  OneSignal.shared.setAppId("6953df17-7938-440c-a4cc-ccff16209b3a");
+  /* OneSignal.shared
+      .init("6953df17-7938-440c-a4cc-ccff16209b3a", iOSSettings: null); 
   OneSignal.shared
-      .init("6953df17-7938-440c-a4cc-ccff16209b3a", iOSSettings: null);
-  OneSignal.shared
-      .setInFocusDisplayType(OSNotificationDisplayType.notification);
+      .setInFocusDisplayType(OSNotificationDisplayType.notification);*/
+  // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+    print("Accepted permission: $accepted");
+  });
 
   //INISIALISASI PENGGUNAAN Get Strorage
   await GetStorage.init();
 
-  runApp(MyApp());
+  //runApp(MyApp());
+  HydratedBlocOverrides.runZoned(
+    () => runApp(MyApp()),
+    storage: storage,
+  );
 }
 
 class MyApp extends StatelessWidget {

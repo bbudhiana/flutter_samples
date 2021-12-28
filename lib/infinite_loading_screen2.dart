@@ -34,16 +34,16 @@ class _InfiniteLoadingScreen2State extends State<InfiniteLoadingScreen2> {
     _postBloc = BlocProvider.of<PostBlocVersion2>(context);
   } */
 
-  @override
+  /* @override
   void initState() {
     // TODO: implement initState
     context.read<PostBlocVersion2>()..add(PostEventInitial());
     super.initState();
-  }
+  } */
 
   @override
   void didChangeDependencies() {
-    //context.read<PostBlocVersion2>()..add(PostInitialEvent());
+    context.read<PostBlocVersion2>()..add(PostEventInitial());
     super.didChangeDependencies();
   }
 
@@ -98,6 +98,7 @@ class _InfiniteLoadingScreen2State extends State<InfiniteLoadingScreen2> {
           } */
 
           if (state is PostInitial) {
+            print('inisial');
             return Center(
               child: CircularProgressIndicator(),
             );

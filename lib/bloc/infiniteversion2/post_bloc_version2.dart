@@ -1,19 +1,51 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:meta/meta.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
+import 'package:http/http.dart' as http;
+import 'package:meta/meta.dart';
+
 import 'bloc.dart';
 import 'post.dart';
 
 class PostBlocVersion2 extends Bloc<PostEvent, PostState> {
   final http.Client httpClient;
 
-  PostBlocVersion2({@required this.httpClient}) : super(PostInitial());
+  PostBlocVersion2({@required this.httpClient}) : super(PostInitial()) {
+    on<PostEventInitial>((event, emit) async {
+      if (state is PostSuccess) {
+        emit(PostInitial());
+      }
+      List<Post> posts = [];
+      posts = await _fetchPosts(0, 20);
+      emit(PostSuccess(posts: posts, hasReachedMax: false));
+    });
 
-  @override
+    on<PostFetched>((event, emit) async {
+      List<Post> posts;
+      if (state is PostInitial) {
+        posts = await _fetchPosts(0, 20);
+        emit(PostSuccess(posts: posts, hasReachedMax: false));
+      } else {
+        //print('Post lebih dari 10');
+        //postLoaded mengambil PostLoaded saat ini dari state
+        PostSuccess postSuccess = state as PostSuccess;
+
+        //ambil post berikutnya dengan parameter start berasal dari jumlah post sebelumnya (limit, quantity)
+        posts = await _fetchPosts(postSuccess.posts.length, 20);
+        /*
+          jika posts yang terambil kosong,maka kembalikan post sebelumnya dan kasih hasReachedMax=true
+          jika post belum empty, maka kembalikan PostLoaded = post lalu (postLoaded.posts) + post saat ini (posts) dan hasReachedMax=false
+          */
+        (posts.isEmpty)
+            ? emit(postSuccess.copyWith(hasReachedMax: true))
+            : emit(PostSuccess(
+                posts: postSuccess.posts + posts, hasReachedMax: false));
+      }
+    });
+  }
+
+  /* @override
   Stream<Transition<PostEvent, PostState>> transformEvents(
     Stream<PostEvent> events,
     TransitionFunction<PostEvent, PostState> transitionFn,
@@ -22,7 +54,7 @@ class PostBlocVersion2 extends Bloc<PostEvent, PostState> {
       events.debounceTime(const Duration(milliseconds: 500)),
       transitionFn,
     );
-  }
+  } */
 
   @override
   Stream<PostState> mapEventToState(PostEvent event) async* {

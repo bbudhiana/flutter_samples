@@ -21,12 +21,23 @@ class _OneSignalNotificationScreenState
     super.initState();
 
     //akan dipanggil ketika notifikasi diterima
-    OneSignal.shared
+    /* OneSignal.shared
         .setNotificationReceivedHandler((OSNotification notification) {
       setState(() {
         title = notification.payload.title;
         content = notification.payload.body;
         url = notification.payload.bigPicture;
+      });
+    }); */
+    OneSignal.shared.setNotificationWillShowInForegroundHandler(
+        (OSNotificationReceivedEvent event) {
+      // Will be called whenever a notification is received in foreground
+      // Display Notification, pass null param for not displaying the notification
+      event.complete(event.notification);
+      setState(() {
+        title = event.notification.title;
+        content = event.notification.body;
+        url = event.notification.bigPicture;
       });
     });
 
